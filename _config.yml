@@ -1,0 +1,82 @@
+# Hexo Configuration
+
+# Site
+title: 成市笔记
+subtitle: 语言 · 身体 · 技术 · 思想
+description: 关于语言、身体、技术和思想的跨域笔记
+keywords:
+  - 语言
+  - 身体政治
+  - 技术
+  - 翻译
+  - 跨文化
+author: 成市
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+url: https://zcs366.github.io
+permalink: :year/:month/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: false
+  trailing_html: false
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+
+# Home page setting
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'mtime'
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Extensions
+theme: landscape
+
+# Deployment
+deploy:
+  type: git
+  repo: git@github.com:zcs366/zcs366.github.io.git
+  branch: gh-pages
