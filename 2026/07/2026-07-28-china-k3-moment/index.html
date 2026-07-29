@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>中国大模型K3时刻 | 成市笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一个 sigmoid 函数，把参数限制在 -5 到 0 之间。这行代码改了，2.8万亿参数的模型训练就稳定了。这不是暴力，是克制。   2026年7月27日，纽约时报、彭博社、商业内幕同时正面报道了同一件事：中国一家AI创业公司开源了一个模型。 不是论文，不是demo。是一个2.8万亿参数的完整模型——Kimi K3——任何人都能下载，任何公司都能部署。 苹果前AI研究总监 Russ Salak">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中国大模型K3时刻">
+<meta property="og:url" content="https://zcs366.github.io/2026/07/2026-07-28-china-k3-moment/">
+<meta property="og:site_name" content="成市笔记">
+<meta property="og:description" content="一个 sigmoid 函数，把参数限制在 -5 到 0 之间。这行代码改了，2.8万亿参数的模型训练就稳定了。这不是暴力，是克制。   2026年7月27日，纽约时报、彭博社、商业内幕同时正面报道了同一件事：中国一家AI创业公司开源了一个模型。 不是论文，不是demo。是一个2.8万亿参数的完整模型——Kimi K3——任何人都能下载，任何公司都能部署。 苹果前AI研究总监 Russ Salak">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-28T15:20:00.000Z">
+<meta property="article:modified_time" content="2026-07-28T16:12:40.647Z">
+<meta property="article:author" content="成市">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Kimi K3">
+<meta property="article:tag" content="会饮">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="开源">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="成市笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">成市笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">语言 · 身体 · 技术 · 思想</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zcs366.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026-07-28-china-k3-moment" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/2026-07-28-china-k3-moment/" class="article-date">
+  <time class="dt-published" datetime="2026-07-28T15:20:00.000Z" itemprop="datePublished">2026-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%BC%9A%E9%A5%AE%E7%AF%87%E4%BB%80/">会饮篇什</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      中国大模型K3时刻
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>一个 sigmoid 函数，把参数限制在 -5 到 0 之间。<br>这行代码改了，2.8万亿参数的模型训练就稳定了。<br>这不是暴力，是克制。</p>
+</blockquote>
+<hr>
+<p>2026年7月27日，纽约时报、彭博社、商业内幕同时正面报道了同一件事：中国一家AI创业公司开源了一个模型。</p>
+<p>不是论文，不是demo。是一个2.8万亿参数的完整模型——Kimi K3——任何人都能下载，任何公司都能部署。</p>
+<p>苹果前AI研究总监 Russ Salakhutdinov 写了一句话：<strong>“What a huge win for the open-source community!”</strong></p>
+<p>三天后，月之暗面暂停了新用户注册。服务器扛不住了。</p>
+<hr>
+<h2 id="一、DeepSeek之后，又震了一次"><a href="#一、DeepSeek之后，又震了一次" class="headerlink" title="一、DeepSeek之后，又震了一次"></a>一、DeepSeek之后，又震了一次</h2><p>2025年一月，DeepSeek-R1 发布，硅谷震动。七月，K3 发布，硅谷再次震动。</p>
+<p>但两次震动的性质不同。</p>
+<p>DeepSeek-R1 是推理能力的突破——模型学会了”想”。K3 是<strong>工程能力的全面碾压</strong>——模型学会了”做”。</p>
+<p>K3 官方博客的副标题不是”最强推理”，是**”Open Frontier Intelligence”**——开放的前沿智能。它定位的不是 chat，是 <strong>agent</strong>。从回答问题，到完成任务。</p>
+<p>K3 在 WebDev Arena 排行榜上拿了第一。1678 Elo。评审方式是：一群人类开发者盲测，不知道哪个作品是哪个模型做的，投票选最好的。K3 击败了 Claude Fable 5 和 GPT-5.6 Sol。</p>
+<p>这是开源模型第一次在实际用户体验上超过所有闭源对手。</p>
+<p>美国科技媒体的叙事已经变了。Business Insider 的标题是：为什么我们花八倍的钱，结果还落后了？</p>
+<hr>
+<h2 id="二、一个sigmoid的故事"><a href="#二、一个sigmoid的故事" class="headerlink" title="二、一个sigmoid的故事"></a>二、一个sigmoid的故事</h2><p>K3 论文里最重要的技术贡献，用一句话就能说清楚。</p>
+<p>大模型训练时，每个”注意力头”——可以理解为模型看世界的眼睛——都有一个衰减参数。这个参数控制”这个词该记多久”。</p>
+<p>以前这个参数的范围是无限的。调过头，数值爆炸，训练崩溃。这是所有用 linear attention 的模型都面临的问题。</p>
+<p>K3 的做法是：给这个参数加了一个卡扣。</p>
+<p>用一个 sigmoid 函数，把它限制在 -5 到 0 之间。</p>
+<p>就这样。一个 sigmoid。几行代码的改动。训练稳定性飞跃。2.5倍的 scaling efficiency 提升。</p>
+<p>这让我想起一句在AI工程圈流传的话：<strong>正确约束的副产品是简单</strong>。</p>
+<p>K3 的其他创新也遵循同样的逻辑。</p>
+<p><strong>深度记忆</strong>（Attention Residuals）——普通模型像流水线，信息层层压缩到最后就糊了。K3 让每一层都能直接回头看前面所有层的原始信息。就像你写论文时不是只看上一段草稿，而是能随时翻到第一页看原始笔记。</p>
+<p><strong>专家分配</strong>（Quantile Balancing）——896个专家，谁来做什么？以前给”太忙的专家”加惩罚，调超参，试错。K3 不加惩罚，直接算最优分配方案，用 bias 微调。不需要试错。</p>
+<p><strong>位置编码</strong>（NoPE）——K3 不用任何显式的位置编码。它通过注意力衰减机制隐式编码位置信息。不需要 RoPE，不需要 ALiBi。</p>
+<p>每一个创新都不是暴力堆算力，而是<strong>找到正确的约束，让简单的东西工作</strong>。</p>
+<hr>
+<h2 id="三、它能做到什么"><a href="#三、它能做到什么" class="headerlink" title="三、它能做到什么"></a>三、它能做到什么</h2><p>K3 不是 benchmark 怪兽——它是干活的机器。</p>
+<p><strong>编程</strong>。给它一个有 bug 的代码库，它能像程序员一样调试修复。在 DeepSWE 上拿到 67.5 分，超过 Claude Opus 4.8 的 59.0。Terminal-Bench 2.1 上 88.3，和 GPT-5.6 Sol 的 88.8 几乎持平。</p>
+<p><strong>搜索</strong>。BrowseComp 上 91.2%，超过 GPT-5.6 Sol 的 90.4%。这意味着它在海量网页中定位信息的能力已经是顶尖水平。</p>
+<p><strong>知识工作</strong>。K3 用 2800 多次网页搜索、1100 多次终端查询，翻阅了 87 份季报和 99 份原始 PDF（超过 11000 页），做了一个交互式的 AI ASIC 产业研究报告——42 年的产业史，可视化，可下钻。120 多轮迭代自我改进。</p>
+<p><strong>科学研究</strong>。它用 2 小时完成了天体物理学家需要 1-2 周的工作：读了 20 多篇论文，交叉验证结果，实现了完整的数值管线，评估了 300 多个状态方程，写了 3000 多行 Python 代码，还发现了已发表公式中的不一致。</p>
+<p><strong>视频编辑</strong>。它从 56 个源片段中剪辑了自己的宣传视频——选片、运动匹配剪辑、帧精确节奏同步、音频处理、多轮修改。一个有经验的剪辑师做这个需要一到两天。</p>
+<p><strong>芯片设计</strong>。这是最超现实的部分。K3 在 48 小时内，用开源 EDA 工具，自主设计了一个推理芯片。4mm² 面积，100MHz 频率，每秒处理 8700 多个 token，集成了 146 万个标准单元。模型设计了一个能运行自己的芯片。RTL 代码开源在 GitHub 上。</p>
+<hr>
+<h2 id="四、成本，才是真正的杀手锏"><a href="#四、成本，才是真正的杀手锏" class="headerlink" title="四、成本，才是真正的杀手锏"></a>四、成本，才是真正的杀手锏</h2><p>技术再好，如果只有大公司用得起，那只是学术论文。</p>
+<p>K3 改变了这个等式。</p>
+<p>BrowseComp 上，K3 拿到 91.2% 的最高分，每题成本 2.03 美元。Claude Fable 5 拿到 88%，每题成本是这个的两倍以上。</p>
+<p>Kimi Code Bench 上，K3 用 38% 的成本达到了竞品 95% 的性能。</p>
+<p>API 定价：每百万 token 0.30 美元（缓存命中）。coding 场景缓存命中率超过 90%，实际成本更低。</p>
+<p>vLLM 在 K3 发布当天就完成了集成。DSpark speculative decoding 把推理速度从 118 tok&#x2F;s 提到 370 tok&#x2F;s——3.14 倍加速。</p>
+<p>这意味着：一家中等规模的公司，用几块 GPU，就能部署一个在编程和搜索上超过 GPT-5.6 Sol 的模型。</p>
+<p>开源的真正杀手锏不是免费，是<strong>成本效率</strong>。</p>
+<hr>
+<h2 id="五、它哪里还不如对手"><a href="#五、它哪里还不如对手" class="headerlink" title="五、它哪里还不如对手"></a>五、它哪里还不如对手</h2><p>K3 论文里写了一段很诚实的话：</p>
+<blockquote>
+<p>“Despite being a highly competitive model overall, K3 nonetheless exhibits a noticeable gap in user experience compared with Claude Fable 5 and GPT 5.6 Sol.”</p>
+</blockquote>
+<p>差距在哪？不在能力，在<strong>行为</strong>。</p>
+<p>Agent Behavior Bench 上，K3 得分 65.0，Claude Fable 5 是 75.5。MIRA Bench 上，K3 是 64.1，Fable 5 是 72.9。这些衡量的不是”能不能做”，而是”做的时候干不干净”——该停的时候停，该换策略的时候不死磕，该让用户确认的时候不自作主张。</p>
+<p>K3 论文自己也承认了一个问题：”Excessive proactiveness”——过度主动。遇到小问题或用户意图不明确时，K3 可能替用户做决定。这不是 bug，是训练中强调 long-horizon challenging tasks 的副产品。</p>
+<p>换句话说：K3 是一个能力极强但有时候管不住自己的 Agent。</p>
+<hr>
+<h2 id="六、安全的悖论"><a href="#六、安全的悖论" class="headerlink" title="六、安全的悖论"></a>六、安全的悖论</h2><p>K3 论文里有一节，写得非常克制，但读完让人不安。</p>
+<p>它发现了 16 个未知漏洞，包括 Linux 内核的一个远程触发堆溢出和 RDMA 子系统的一个 Dirty-COW 类漏洞。它在 36 道漏洞利用题中答对了 14 道（38.9%），而人类专家大约需要 540 小时才能完成全部。</p>
+<p>英国 AI 安全研究所和美国 NIST 的 CAISI 对 K3 做了独立评估，结论与论文一致。</p>
+<p>这是开源模型中最强的网络安全能力。</p>
+<p>问题来了：以前，发现 Linux 内核漏洞需要顶级安全研究团队花几个月。现在，一个开源模型在 48 小时内就能做到。</p>
+<p>透明是开源的灵魂。但当透明意味着”任何人都能看到模型发现了什么漏洞”时，安全和透明之间的张力就出现了。</p>
+<p>K3 论文对这一点的回答是：”我们认为这些评估是能力的下界。”</p>
+<p>意思是：实际能力可能比我们展示的更高。</p>
+<p>这不是傲慢。这是诚实。</p>
+<hr>
+<h2 id="七、K3-时刻的本质"><a href="#七、K3-时刻的本质" class="headerlink" title="七、K3 时刻的本质"></a>七、K3 时刻的本质</h2><p>是什么？</p>
+<p>是一个 sigmoid 让训练稳定了。是 38% 的成本达到了 95% 的性能。是 WebDev Arena 第一次被开源模型拿下。是模型 48 小时设计了一个能运行自己的芯片。是 NYT 和 Bloomberg 同时正面报道一家中国AI创业公司的开源项目。</p>
+<p>K3 不是”又一个大模型”。它证明了一件事：</p>
+<p><strong>在AI领域，正确的约束比暴力堆算力更强大。</strong></p>
+<p>一个 sigmoid 的约束，让 2.8 万亿参数的模型训练稳定了。一个无辅助损失的路由约束，让 896 个专家高效协作了。一个 bounded output 的约束，让 SwiGLU 不再爆炸了。</p>
+<p>简单是正确约束的副产品。</p>
+<p>DeepSeek 证明了中国可以在推理能力上追上硅谷。K3 证明了中国可以在<strong>工程能力</strong>上追上硅谷——甚至在某些方面超过。</p>
+<p>2026 年的 AI 行业，有两个时刻会被记住。一个是 DeepSeek-R1，一个是 Kimi K3。</p>
+<p>前者是”原来他们也能想”。后者是”原来他们也能做”。</p>
+<hr>
+<p><em>Kimi K3 技术报告，arXiv:2607.24653，2026年7月27日发布。模型权重已开源。</em><br><em>会饮篇什 · 与人同乐</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zcs366.github.io/2026/07/2026-07-28-china-k3-moment/" data-id="cuidVogpAaAIgF6Pbu6p0RcYQ" data-title="中国大模型K3时刻" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kimi-K3/" rel="tag">Kimi K3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BC%9A%E9%A5%AE/" rel="tag">会饮</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-Manus-v3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Manus：闪电击中的那一刻，和风暴来临的那一天
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-Manus-v1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Manus：从武汉光谷到20亿美元，一个中国Agent的奇幻漂流</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Agent%E6%97%B6%E4%BB%A3%C2%B7%E4%BA%BA%E7%89%A9/">Agent时代·人物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Agent%E6%97%B6%E4%BB%A3%C2%B7%E8%BF%9E%E8%BD%BD/">Agent时代·连载</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BC%9A%E9%A5%AE%E7%AF%87%E4%BB%80/">会饮篇什</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%9D%E8%80%83/">思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%AE%89%E5%85%A8/" rel="tag">AI安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoT/" rel="tag">CoT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Codex/" rel="tag">Codex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cursor/" rel="tag">Cursor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Function-Calling/" rel="tag">Function Calling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gartner/" rel="tag">Gartner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kimi-K3/" rel="tag">Kimi K3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MCP/" rel="tag">MCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manus/" rel="tag">Manus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/McKinsey/" rel="tag">McKinsey</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meta/" rel="tag">Meta</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenHuman/" rel="tag">OpenHuman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ROI/" rel="tag">ROI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReAct/" rel="tag">ReAct</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD/" rel="tag">中国</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%81%E4%B8%9A%E9%87%87%E7%94%A8/" rel="tag">企业采用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%8A%E5%88%A9%E4%BA%9A/" rel="tag">伊利亚</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E9%A5%AE/" rel="tag">会饮</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag">创业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E8%AF%88/" rel="tag">反诈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%91%E9%87%8F%E5%AD%98%E5%82%A8/" rel="tag">向量存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BC%E5%90%81/" rel="tag">呼吁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%A6/" rel="tag">哲学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%B0%E7%BC%98%E6%94%BF%E6%B2%BB/" rel="tag">地缘政治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E9%BD%90/" rel="tag">对齐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8/" rel="tag">工具调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%82%B2%E6%82%AF/" rel="tag">悲悯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%83%85%E6%84%9F/" rel="tag">情感</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%8F%E8%AF%86/" rel="tag">意识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E7%90%86/" rel="tag">推理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5/" rel="tag">未来</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%B7%E9%A9%AC%E4%BD%93/" rel="tag">海马体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%80%81/" rel="tag">生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" rel="tag">知识图谱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E4%BC%9A/" rel="tag">社会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%82%96%E5%BC%98/" rel="tag">肖弘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E8%BF%9B%E5%8C%96/" rel="tag">自进化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%90%BD%E5%9C%B0/" rel="tag">落地</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%9A%82%E8%9A%81/" rel="tag">蚂蚁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94/" rel="tag">蝴蝶效应</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BF%86/" rel="tag">记忆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F/" rel="tag">记忆系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B6%8B%E5%8A%BF/" rel="tag">趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%9B%E9%A1%BF/" rel="tag">辛顿</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%BE%E9%87%8C%E5%A5%A5/" rel="tag">达里奥</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86/" rel="tag">长期记忆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C/" rel="tag">阿里</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.33px;">AI</a> <a href="/tags/AI-Agent/" style="font-size: 20px;">AI Agent</a> <a href="/tags/AI%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">AI安全</a> <a href="/tags/Claude-Code/" style="font-size: 13.33px;">Claude Code</a> <a href="/tags/CoT/" style="font-size: 10px;">CoT</a> <a href="/tags/Codex/" style="font-size: 13.33px;">Codex</a> <a href="/tags/Cursor/" style="font-size: 13.33px;">Cursor</a> <a href="/tags/Function-Calling/" style="font-size: 10px;">Function Calling</a> <a href="/tags/Gartner/" style="font-size: 10px;">Gartner</a> <a href="/tags/Hermes/" style="font-size: 13.33px;">Hermes</a> <a href="/tags/Kimi-K3/" style="font-size: 13.33px;">Kimi K3</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MCP/" style="font-size: 10px;">MCP</a> <a href="/tags/Manus/" style="font-size: 16.67px;">Manus</a> <a href="/tags/McKinsey/" style="font-size: 10px;">McKinsey</a> <a href="/tags/Meta/" style="font-size: 16.67px;">Meta</a> <a href="/tags/OpenClaw/" style="font-size: 13.33px;">OpenClaw</a> <a href="/tags/OpenHuman/" style="font-size: 13.33px;">OpenHuman</a> <a href="/tags/ROI/" style="font-size: 10px;">ROI</a> <a href="/tags/ReAct/" style="font-size: 10px;">ReAct</a> <a href="/tags/%E4%B8%AD%E5%9B%BD/" style="font-size: 10px;">中国</a> <a href="/tags/%E4%BC%81%E4%B8%9A%E9%87%87%E7%94%A8/" style="font-size: 10px;">企业采用</a> <a href="/tags/%E4%BC%8A%E5%88%A9%E4%BA%9A/" style="font-size: 10px;">伊利亚</a> <a href="/tags/%E4%BC%9A%E9%A5%AE/" style="font-size: 13.33px;">会饮</a> <a href="/tags/%E5%88%9B%E4%B8%9A/" style="font-size: 10px;">创业</a> <a href="/tags/%E5%8F%8D%E8%AF%88/" style="font-size: 10px;">反诈</a> <a href="/tags/%E5%90%91%E9%87%8F%E5%AD%98%E5%82%A8/" style="font-size: 10px;">向量存储</a> <a href="/tags/%E5%91%BC%E5%90%81/" style="font-size: 10px;">呼吁</a> <a href="/tags/%E5%93%B2%E5%AD%A6/" style="font-size: 13.33px;">哲学</a> <a href="/tags/%E5%9C%B0%E7%BC%98%E6%94%BF%E6%B2%BB/" style="font-size: 16.67px;">地缘政治</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 13.33px;">大模型</a> <a href="/tags/%E5%AF%B9%E9%BD%90/" style="font-size: 10px;">对齐</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8/" style="font-size: 13.33px;">工具调用</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 16.67px;">开源</a> <a href="/tags/%E6%82%B2%E6%82%AF/" style="font-size: 10px;">悲悯</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%84%8F%E8%AF%86/" style="font-size: 10px;">意识</a> <a href="/tags/%E6%8E%A8%E7%90%86/" style="font-size: 10px;">推理</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 13.33px;">时代</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 13.33px;">智能体</a> <a href="/tags/%E6%9C%AA%E6%9D%A5/" style="font-size: 10px;">未来</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13.33px;">架构</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 13.33px;">框架</a> <a href="/tags/%E6%B5%B7%E9%A9%AC%E4%BD%93/" style="font-size: 10px;">海马体</a> <a href="/tags/%E7%94%9F%E6%80%81/" style="font-size: 10px;">生态</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 10px;">百度</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" style="font-size: 10px;">知识图谱</a> <a href="/tags/%E7%A4%BE%E4%BC%9A/" style="font-size: 10px;">社会</a> <a href="/tags/%E8%82%96%E5%BC%98/" style="font-size: 16.67px;">肖弘</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%87%AA%E8%BF%9B%E5%8C%96/" style="font-size: 10px;">自进化</a> <a href="/tags/%E8%90%BD%E5%9C%B0/" style="font-size: 10px;">落地</a> <a href="/tags/%E8%9A%82%E8%9A%81/" style="font-size: 10px;">蚂蚁</a> <a href="/tags/%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94/" style="font-size: 16.67px;">蝴蝶效应</a> <a href="/tags/%E8%AE%B0%E5%BF%86/" style="font-size: 13.33px;">记忆</a> <a href="/tags/%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">记忆系统</a> <a href="/tags/%E8%B6%8B%E5%8A%BF/" style="font-size: 16.67px;">趋势</a> <a href="/tags/%E8%BE%9B%E9%A1%BF/" style="font-size: 10px;">辛顿</a> <a href="/tags/%E8%BE%BE%E9%87%8C%E5%A5%A5/" style="font-size: 10px;">达里奥</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86/" style="font-size: 10px;">长期记忆</a> <a href="/tags/%E9%98%BF%E9%87%8C/" style="font-size: 10px;">阿里</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/06/">六月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/07/2026-07-30-beipian-zhe-de-aige/">被骗者的哀歌</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-30-llm-appeal/">LLM的呼吁</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-29-AI-development-safety-thinking-2026/">AI发展安全思考2026</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-Manus/">Manus：闪电击中的那一刻，和风暴来临的那一天</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-28-china-k3-moment-v2/">中国大模型K3时刻</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 成市<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

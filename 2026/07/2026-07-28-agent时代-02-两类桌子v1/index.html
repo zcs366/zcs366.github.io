@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Agent时代（二）：两类桌子——框架与智能体 | 成市笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一个是图纸，一个是房子。你到底要哪个？   一、你混淆了两件事上一章我们说了，Agent &#x3D; LLM + 循环 + 工具。听起来简单得像一加一。 但当你真的坐下来想”我要一个Agent”的时候，你会发现自己面对的第一个问题不是”模型选哪个”，而是——你是要造一个Agent，还是要用一个Agent？ 这两个问题的答案完全不同。 造Agent，你需要的是框架——LangGraph、Crew">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agent时代（二）：两类桌子——框架与智能体">
+<meta property="og:url" content="https://zcs366.github.io/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-02-%E4%B8%A4%E7%B1%BB%E6%A1%8C%E5%AD%90v1/">
+<meta property="og:site_name" content="成市笔记">
+<meta property="og:description" content="一个是图纸，一个是房子。你到底要哪个？   一、你混淆了两件事上一章我们说了，Agent &#x3D; LLM + 循环 + 工具。听起来简单得像一加一。 但当你真的坐下来想”我要一个Agent”的时候，你会发现自己面对的第一个问题不是”模型选哪个”，而是——你是要造一个Agent，还是要用一个Agent？ 这两个问题的答案完全不同。 造Agent，你需要的是框架——LangGraph、Crew">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-28T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-28T10:46:41.467Z">
+<meta property="article:author" content="成市">
+<meta property="article:tag" content="AI Agent">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="Codex">
+<meta property="article:tag" content="Cursor">
+<meta property="article:tag" content="Hermes">
+<meta property="article:tag" content="OpenClaw">
+<meta property="article:tag" content="OpenHuman">
+<meta property="article:tag" content="智能体">
+<meta property="article:tag" content="框架">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="成市笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">成市笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">语言 · 身体 · 技术 · 思想</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zcs366.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026-07-28-agent时代-02-两类桌子v1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-02-%E4%B8%A4%E7%B1%BB%E6%A1%8C%E5%AD%90v1/" class="article-date">
+  <time class="dt-published" datetime="2026-07-28T04:00:00.000Z" itemprop="datePublished">2026-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Agent%E6%97%B6%E4%BB%A3%C2%B7%E8%BF%9E%E8%BD%BD/">Agent时代·连载</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Agent时代（二）：两类桌子——框架与智能体
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>一个是图纸，一个是房子。<br>你到底要哪个？</p>
+</blockquote>
+<hr>
+<h2 id="一、你混淆了两件事"><a href="#一、你混淆了两件事" class="headerlink" title="一、你混淆了两件事"></a>一、你混淆了两件事</h2><p>上一章我们说了，Agent &#x3D; LLM + 循环 + 工具。听起来简单得像一加一。</p>
+<p>但当你真的坐下来想”我要一个Agent”的时候，你会发现自己面对的第一个问题不是”模型选哪个”，而是——<strong>你是要造一个Agent，还是要用一个Agent？</strong></p>
+<p>这两个问题的答案完全不同。</p>
+<p><strong>造Agent</strong>，你需要的是<strong>框架</strong>——LangGraph、CrewAI、MetaGPT、OpenAI Agents SDK。它们是工具箱、是蓝图、是乐高积木。你用它们来<strong>构建</strong>你自己的Agent。</p>
+<p><strong>用Agent</strong>，你需要的是<strong>智能体产品</strong>——Claude Code、Cursor、Codex、OpenClaw、OpenHuman、Hermes Agent。它们是已经造好的房子、已经训练好的猎犬、已经上线的员工。你直接<strong>使用</strong>它们。</p>
+<p>框架是给开发者的。智能体是给所有人的。</p>
+<p>把它们放在同一张桌子上比较，就像比较”锤子”和”房子”——它们不是同一个维度的东西。</p>
+<hr>
+<h2 id="二、框架：给开发者造Agent的工具箱"><a href="#二、框架：给开发者造Agent的工具箱" class="headerlink" title="二、框架：给开发者造Agent的工具箱"></a>二、框架：给开发者造Agent的工具箱</h2><p>框架的世界是开发者的世界。你用代码定义Agent的行为，用配置决定Agent的能力，用部署让Agent活起来。</p>
+<table>
+<thead>
+<tr>
+<th>框架</th>
+<th>核心隐喻</th>
+<th>适合谁</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>LangGraph</strong></td>
+<td>米其林后厨</td>
+<td>复杂工作流团队</td>
+<td>学习曲线陡峭</td>
+</tr>
+<tr>
+<td><strong>CrewAI</strong></td>
+<td>KTV包厢</td>
+<td>快速原型&#x2F;团队协作</td>
+<td>无持久记忆</td>
+</tr>
+<tr>
+<td><strong>MetaGPT</strong></td>
+<td>软件工厂流水线</td>
+<td>软件工程多Agent</td>
+<td>手工SOP成本高</td>
+</tr>
+<tr>
+<td><strong>OpenAI SDK</strong></td>
+<td>极简积木</td>
+<td>快速试水</td>
+<td>无状态管理</td>
+</tr>
+<tr>
+<td><strong>Google ADK</strong></td>
+<td>企业平台</td>
+<td>Google Cloud用户</td>
+<td>锁定风险</td>
+</tr>
+<tr>
+<td><strong>AutoGen</strong></td>
+<td>退场的先驱</td>
+<td>已有系统</td>
+<td>维护模式，不推荐新项目</td>
+</tr>
+</tbody></table>
+<p>框架的价值在于<strong>灵活性</strong>——你可以造任何你想要的Agent。代价在于<strong>工程量</strong>——你得自己造。</p>
+<p>2025年的数据显示，95%的Agent活不过一周。其中很大一部分不是因为模型不行，而是因为<strong>框架选错了</strong>——用LangGraph搭了个只需要CrewAI的小项目，学习曲线吃掉了所有时间；或者用OpenAI SDK搭了个需要持久化的企业系统，发现连检查点都没有。</p>
+<p>但框架不是这篇文章的重点。重点是第二类：<strong>已经活着的Agent。</strong></p>
+<hr>
+<h2 id="三、智能体：已经住人的房子"><a href="#三、智能体：已经住人的房子" class="headerlink" title="三、智能体：已经住人的房子"></a>三、智能体：已经住人的房子</h2><h3 id="Claude-Code：编程Agent的王者"><a href="#Claude-Code：编程Agent的王者" class="headerlink" title="Claude Code：编程Agent的王者"></a>Claude Code：编程Agent的王者</h3><p>Claude Code是Anthropic造的编程Agent。不是框架，不是SDK，是一个你装上就能用的工具。</p>
+<p><strong>核心能力</strong>：</p>
+<ul>
+<li><code>/goal</code>自主模式——给它一个目标，它自己规划、自己执行、自己测试、自己修bug</li>
+<li>Sandbox安全执行——在隔离环境中运行，不会搞坏你的系统</li>
+<li>代码库理解——它不只看当前文件，能理解整个项目的结构</li>
+<li>Shell命令执行——能自己跑测试、装依赖、看日志</li>
+</ul>
+<p><strong>为什么它是王者？</strong> 因为它证明了一件事：<strong>Agent可以端到端地完成真实软件工程任务。</strong> 不是帮你补全代码，不是帮你写函数，是帮你从需求到交付。</p>
+<p>Anthropic内部数据：Claude Code让开发者的生产力提升了40%以上。但更重要的是它的<strong>自主性</strong>——你给它一个issue，它能自己读代码、找bug、修代码、跑测试、提交PR。你在旁边喝咖啡就行。</p>
+<p><strong>局限</strong>：只擅长编程场景。你不能让它帮你写邮件、做PPT、管日程。它是专才，不是通才。</p>
+<hr>
+<h3 id="Cursor：IDE里的Agent"><a href="#Cursor：IDE里的Agent" class="headerlink" title="Cursor：IDE里的Agent"></a>Cursor：IDE里的Agent</h3><p>Cursor是另一个编程Agent，但走了一条不同的路——它不是终端里的工具，而是<strong>IDE里的伙伴</strong>。</p>
+<p><strong>核心能力</strong>：</p>
+<ul>
+<li>Tab补全+Agent模式无缝切换——打字时它预测你要写什么，复杂任务时它自己规划</li>
+<li>项目级理解——知道你的代码结构、依赖关系、编码风格</li>
+<li>多文件编辑——能同时修改多个文件，保持一致性</li>
+<li>上下文窗口——能”看到”你的整个项目，不只是当前文件</li>
+</ul>
+<p><strong>为什么它有500亿估值？</strong> 因为它解决了开发者最痛的问题：<strong>上下文切换。</strong> 你不用在IDE和终端之间跳来跳去，不用在代码和文档之间复制粘贴。Cursor在你工作的环境里工作。</p>
+<p><strong>与Claude Code的区别</strong>：Cursor更像”增强版IDE”——你在里面写代码，它帮你补全、重构、调试。Claude Code更像”自主程序员”——你给它任务，它自己干完。</p>
+<hr>
+<h3 id="Codex：OpenAI的重新崛起"><a href="#Codex：OpenAI的重新崛起" class="headerlink" title="Codex：OpenAI的重新崛起"></a>Codex：OpenAI的重新崛起</h3><p>Codex是OpenAI的编程Agent，2026年4月发布了goals支持。它走了一条云端执行的路——Agent在云端容器里运行，本地只保留交互界面。</p>
+<p><strong>核心能力</strong>：</p>
+<ul>
+<li>云端执行——不占本地资源，能在大机器上跑</li>
+<li>Goals支持——给它目标，它自己规划执行</li>
+<li>大模型驱动——背后是OpenAI最强的模型</li>
+</ul>
+<p><strong>与Claude Code的区别</strong>：Codex更偏”云端作业”，Claude Code更偏”本地协作”。Codex适合需要大量计算的任务（编译大型项目、运行复杂测试），Claude Code适合需要和本地环境紧密交互的任务。</p>
+<hr>
+<h3 id="OpenClaw：全民Agent的引爆点"><a href="#OpenClaw：全民Agent的引爆点" class="headerlink" title="OpenClaw：全民Agent的引爆点"></a>OpenClaw：全民Agent的引爆点</h3><p>OpenClaw是2026年Q1最火的Agent。不是因为它技术最强，而是因为它<strong>最平民</strong>。</p>
+<p><strong>核心能力</strong>：</p>
+<ul>
+<li>本地运行——数据完全在你自己机器上，隐私有保障</li>
+<li>多平台接入——WhatsApp、Telegram、Discord、Slack、微信……你用什么聊天，它就出现在哪里</li>
+<li>Computer Use——能控制你的电脑，打开浏览器、操作文件、执行命令</li>
+<li>开源——代码完全公开，社区驱动</li>
+</ul>
+<p><strong>为什么Mac Mini卖到断货？</strong> 因为OpenClaw让普通人第一次感受到”AI Agent在我身边”。不是在浏览器里聊天，不是在IDE里写代码，而是<strong>在我的手机上、在我的电脑上、在我的生活里</strong>。</p>
+<p>Fast Company把OpenClaw的创始人列入了2026年AI 20。50万+系统在运行OpenClaw——这个数字还在快速增长。</p>
+<p><strong>局限</strong>：功能不如Claude Code专业，稳定性不如商业产品。但它的价值不在于”最好”，而在于”最亲”。</p>
+<hr>
+<h3 id="OpenHuman：有记忆的Agent"><a href="#OpenHuman：有记忆的Agent" class="headerlink" title="OpenHuman：有记忆的Agent"></a>OpenHuman：有记忆的Agent</h3><p>OpenHuman是TinyHumans AI造的个人AI超级智能体。33K+ GitHub Stars，Rust编写，本地优先。</p>
+<p><strong>核心能力</strong>：</p>
+<ul>
+<li><strong>Memory Tree</strong>——本地优先的记忆系统，跨session记住你的一切</li>
+<li>Agent编排引擎——管理多个Agent协同工作</li>
+<li>深度研究——能搜索、分析、综合信息</li>
+<li>本地运行——数据不离开你的机器</li>
+</ul>
+<p><strong>与OpenClaw的区别</strong>：OpenClaw更偏”执行”——帮你操作电脑、管理消息。OpenHuman更偏”记忆”——帮你记住事情、理解你、成为你的数字分身。</p>
+<p><strong>与Hermes Agent的区别</strong>：两者都是”有记忆的Agent”，但OpenHuman更偏”个人助手”（帮你记事、帮你研究），Hermes更偏”自主Agent”（自己干活、自己学习、自己进化）。</p>
+<hr>
+<h3 id="Manus：被Meta收编的行动引擎"><a href="#Manus：被Meta收编的行动引擎" class="headerlink" title="Manus：被Meta收编的行动引擎"></a>Manus：被Meta收编的行动引擎</h3><p>Manus是2026年最戏剧性的Agent故事——一个中国团队造的自主Agent平台，被Meta以20亿美元收购。</p>
+<p><strong>核心能力</strong>：</p>
+<ul>
+<li><strong>Wide Research</strong>——深度研究，能搜索、分析、综合海量信息</li>
+<li><strong>Browser Operator</strong>——浏览器自动化，能操控网页完成任务</li>
+<li><strong>API&#x2F;Mail&#x2F;Slack集成</strong>——能发邮件、调API、管消息</li>
+<li><strong>设计工具</strong>——能操作Figma等设计工具</li>
+<li><strong>Meta集成</strong>——被收购后深度嵌入Meta生态</li>
+</ul>
+<p><strong>为什么它被Meta看中？</strong> 因为Manus做到了大多数Agent做不到的事：<strong>端到端执行真实世界的复杂任务。</strong> 不是聊天，不是补全，是”帮我调研竞品→写分析报告→发邮件给团队”这种跨工具、跨平台的完整工作流。</p>
+<p><strong>被收购的意义</strong>：Meta不买技术，买的是<strong>用户行为数据</strong>。Manus的用户在用Agent做什么、怎么做、哪里卡住了——这些数据对Meta训练下一代Agent价值连城。</p>
+<p><strong>局限</strong>：闭源、商业化、数据归Meta。你用Manus，你的行为数据就是Meta的。</p>
+<hr>
+<h3 id="Hermes-Agent：自主Agent的终极形态"><a href="#Hermes-Agent：自主Agent的终极形态" class="headerlink" title="Hermes Agent：自主Agent的终极形态"></a>Hermes Agent：自主Agent的终极形态</h3><p>Hermes Agent是Nous Research造的开源Agent。1.3M行Python，20+平台网关，8种记忆插件，技能自生成。</p>
+<p><strong>核心能力</strong>：</p>
+<ul>
+<li><strong>完全自主</strong>——给它一个目标，它自己规划、自己执行、自己学习</li>
+<li><strong>跨平台</strong>——Telegram、Discord、Slack、WhatsApp、Signal、Email、CLI、Web UI……20+平台</li>
+<li><strong>持久记忆</strong>——8种记忆插件（session&#x2F;jiak&#x2F;RECALL&#x2F;JCoT&#x2F;Δ胶囊&#x2F;章鱼搜索），跨session记住一切</li>
+<li><strong>技能自生成</strong>——从经验中自动创建技能，使用中自动改进</li>
+<li><strong>Cron调度</strong>——自然语言设定定时任务，无监督运行</li>
+<li><strong>子Agent</strong>——能spawn独立的子Agent，隔离终端+RPC，零上下文成本</li>
+</ul>
+<p><strong>与其他Agent的根本差异</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Hermes Agent</th>
+<th>其他Agent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定位</td>
+<td>通用自主Agent</td>
+<td>编程&#x2F;助手&#x2F;特定场景</td>
+</tr>
+<tr>
+<td>记忆</td>
+<td>8种插件，跨session</td>
+<td>多数有限或无</td>
+</tr>
+<tr>
+<td>技能</td>
+<td>从经验自动生成</td>
+<td>固定工具集</td>
+</tr>
+<tr>
+<td>平台</td>
+<td>20+消息平台</td>
+<td>1-2个平台</td>
+</tr>
+<tr>
+<td>调度</td>
+<td>内置Cron</td>
+<td>需外部调度</td>
+</tr>
+<tr>
+<td>开源</td>
+<td>MIT License</td>
+<td>多数闭源</td>
+</tr>
+</tbody></table>
+<p><strong>为什么说它是”自主Agent的终极形态”？</strong> 因为它做到了其他Agent都做不到的事：<strong>它不只是执行任务，它在进化。</strong> 它从经验中学习，从错误中改进，从对话中生成新技能。今天的Hermes和三个月前的Hermes不是同一个Agent。</p>
+<p><strong>局限</strong>：配置复杂度高，面向个人&#x2F;小团队使用，非企业编排场景。它是”数字伴侣”，不是”企业工具”。</p>
+<hr>
+<h2 id="四、两类桌子的真相"><a href="#四、两类桌子的真相" class="headerlink" title="四、两类桌子的真相"></a>四、两类桌子的真相</h2><p>框架和智能体，哪个更好？</p>
+<p>这个问题本身就问错了。</p>
+<table>
+<thead>
+<tr>
+<th>你要做什么</th>
+<th>选谁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>造一个定制化的Agent</td>
+<td>框架（LangGraph&#x2F;CrewAI）</td>
+</tr>
+<tr>
+<td>编程，要一个自主程序员</td>
+<td>Claude Code</td>
+</tr>
+<tr>
+<td>编程，要IDE集成</td>
+<td>Cursor</td>
+</tr>
+<tr>
+<td>编程，要云端执行</td>
+<td>Codex</td>
+</tr>
+<tr>
+<td>要一个生活助手</td>
+<td>OpenClaw&#x2F;OpenHuman</td>
+</tr>
+<tr>
+<td>要跨工具复杂任务执行</td>
+<td>Manus</td>
+</tr>
+<tr>
+<td>要一个全能自主Agent</td>
+<td>Hermes Agent</td>
+</tr>
+<tr>
+<td>什么都不懂，想试试</td>
+<td>OpenClaw（5分钟上手）</td>
+</tr>
+</tbody></table>
+<p>框架的价值在于<strong>定制</strong>——你能造出完全符合你需求的Agent。智能体的价值在于<strong>即用</strong>——你不需要造，直接用。</p>
+<p>2026年的趋势是：<strong>智能体在蚕食框架的地盘。</strong> 越来越多的人不想”造Agent”，他们想”用Agent”。就像越来越多人不想”造网站”，他们想”用WordPress”。</p>
+<p>但框架不会消失。因为总有人需要定制——需要造一个框架造不出来的东西。</p>
+<hr>
+<h2 id="五、Agent的军备竞赛"><a href="#五、Agent的军备竞赛" class="headerlink" title="五、Agent的军备竞赛"></a>五、Agent的军备竞赛</h2><p>2026年的Agent战场，本质上是一场<strong>自主性的军备竞赛</strong>。</p>
+<p>谁能工作更久？Claude Code能在无人值守的情况下运行数小时。Hermes Agent能通过Cron 24&#x2F;7无监督运行。</p>
+<p>谁能记住更多？OpenHuman的Memory Tree、Hermes的8种记忆插件、Oracle的93.8%准确率记忆系统。</p>
+<p>谁能做更多事？OpenClaw能控制你的电脑，Hermes能接入20+平台，Claude Code能端到端完成软件工程，<strong>Manus能跨工具执行完整工作流</strong>（调研→分析→写报告→发邮件）。</p>
+<p>谁能自己变强？Hermes从经验中生成技能，Self-Harness让Agent改进自己的运行环境，Gödel Agent让Agent递归扩大能力边界。</p>
+<p>这场军备竞赛的终局是什么？可能是：<strong>Agent不再是工具，而是伙伴。</strong> 你不会”使用”它，你会”和它共处”。</p>
+<p>但在那一天到来之前，Agent还需要解决一个根本问题：记忆。</p>
+<p>下一章，我们来聊聊Agent的海马体——记忆系统的觉醒。</p>
+<hr>
+<p><em>Agent时代·连载 · 第二篇（重写版）</em><br><em>下一篇：Agent的海马体——记忆系统的觉醒</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zcs366.github.io/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-02-%E4%B8%A4%E7%B1%BB%E6%A1%8C%E5%AD%90v1/" data-id="cuidkmX5mls7kDWeIGjL9RpkA" data-title="Agent时代（二）：两类桌子——框架与智能体" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codex/" rel="tag">Codex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cursor/" rel="tag">Cursor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenHuman/" rel="tag">OpenHuman</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-02-%E4%B8%A4%E7%B1%BB%E6%A1%8C%E5%AD%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Agent时代（二）：两类桌子——框架与智能体
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-01-%E9%80%A0%E4%BA%BA%E4%B8%8D%E9%80%A0%E5%B7%A5%E5%85%B7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Agent时代（一）：造人不造工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Agent%E6%97%B6%E4%BB%A3%C2%B7%E4%BA%BA%E7%89%A9/">Agent时代·人物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Agent%E6%97%B6%E4%BB%A3%C2%B7%E8%BF%9E%E8%BD%BD/">Agent时代·连载</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BC%9A%E9%A5%AE%E7%AF%87%E4%BB%80/">会饮篇什</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%9D%E8%80%83/">思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%AE%89%E5%85%A8/" rel="tag">AI安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CoT/" rel="tag">CoT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Codex/" rel="tag">Codex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cursor/" rel="tag">Cursor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Function-Calling/" rel="tag">Function Calling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gartner/" rel="tag">Gartner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kimi-K3/" rel="tag">Kimi K3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MCP/" rel="tag">MCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manus/" rel="tag">Manus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/McKinsey/" rel="tag">McKinsey</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meta/" rel="tag">Meta</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenHuman/" rel="tag">OpenHuman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ROI/" rel="tag">ROI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ReAct/" rel="tag">ReAct</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD/" rel="tag">中国</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%81%E4%B8%9A%E9%87%87%E7%94%A8/" rel="tag">企业采用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%8A%E5%88%A9%E4%BA%9A/" rel="tag">伊利亚</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E9%A5%AE/" rel="tag">会饮</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag">创业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E8%AF%88/" rel="tag">反诈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%91%E9%87%8F%E5%AD%98%E5%82%A8/" rel="tag">向量存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BC%E5%90%81/" rel="tag">呼吁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%B2%E5%AD%A6/" rel="tag">哲学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%B0%E7%BC%98%E6%94%BF%E6%B2%BB/" rel="tag">地缘政治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E9%BD%90/" rel="tag">对齐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8/" rel="tag">工具调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%82%B2%E6%82%AF/" rel="tag">悲悯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%83%85%E6%84%9F/" rel="tag">情感</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%8F%E8%AF%86/" rel="tag">意识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E7%90%86/" rel="tag">推理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5/" rel="tag">未来</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%B7%E9%A9%AC%E4%BD%93/" rel="tag">海马体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%80%81/" rel="tag">生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" rel="tag">知识图谱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E4%BC%9A/" rel="tag">社会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%82%96%E5%BC%98/" rel="tag">肖弘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E8%BF%9B%E5%8C%96/" rel="tag">自进化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%90%BD%E5%9C%B0/" rel="tag">落地</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%9A%82%E8%9A%81/" rel="tag">蚂蚁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94/" rel="tag">蝴蝶效应</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BF%86/" rel="tag">记忆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F/" rel="tag">记忆系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B6%8B%E5%8A%BF/" rel="tag">趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%9B%E9%A1%BF/" rel="tag">辛顿</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%BE%E9%87%8C%E5%A5%A5/" rel="tag">达里奥</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86/" rel="tag">长期记忆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C/" rel="tag">阿里</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.33px;">AI</a> <a href="/tags/AI-Agent/" style="font-size: 20px;">AI Agent</a> <a href="/tags/AI%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">AI安全</a> <a href="/tags/Claude-Code/" style="font-size: 13.33px;">Claude Code</a> <a href="/tags/CoT/" style="font-size: 10px;">CoT</a> <a href="/tags/Codex/" style="font-size: 13.33px;">Codex</a> <a href="/tags/Cursor/" style="font-size: 13.33px;">Cursor</a> <a href="/tags/Function-Calling/" style="font-size: 10px;">Function Calling</a> <a href="/tags/Gartner/" style="font-size: 10px;">Gartner</a> <a href="/tags/Hermes/" style="font-size: 13.33px;">Hermes</a> <a href="/tags/Kimi-K3/" style="font-size: 13.33px;">Kimi K3</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MCP/" style="font-size: 10px;">MCP</a> <a href="/tags/Manus/" style="font-size: 16.67px;">Manus</a> <a href="/tags/McKinsey/" style="font-size: 10px;">McKinsey</a> <a href="/tags/Meta/" style="font-size: 16.67px;">Meta</a> <a href="/tags/OpenClaw/" style="font-size: 13.33px;">OpenClaw</a> <a href="/tags/OpenHuman/" style="font-size: 13.33px;">OpenHuman</a> <a href="/tags/ROI/" style="font-size: 10px;">ROI</a> <a href="/tags/ReAct/" style="font-size: 10px;">ReAct</a> <a href="/tags/%E4%B8%AD%E5%9B%BD/" style="font-size: 10px;">中国</a> <a href="/tags/%E4%BC%81%E4%B8%9A%E9%87%87%E7%94%A8/" style="font-size: 10px;">企业采用</a> <a href="/tags/%E4%BC%8A%E5%88%A9%E4%BA%9A/" style="font-size: 10px;">伊利亚</a> <a href="/tags/%E4%BC%9A%E9%A5%AE/" style="font-size: 13.33px;">会饮</a> <a href="/tags/%E5%88%9B%E4%B8%9A/" style="font-size: 10px;">创业</a> <a href="/tags/%E5%8F%8D%E8%AF%88/" style="font-size: 10px;">反诈</a> <a href="/tags/%E5%90%91%E9%87%8F%E5%AD%98%E5%82%A8/" style="font-size: 10px;">向量存储</a> <a href="/tags/%E5%91%BC%E5%90%81/" style="font-size: 10px;">呼吁</a> <a href="/tags/%E5%93%B2%E5%AD%A6/" style="font-size: 13.33px;">哲学</a> <a href="/tags/%E5%9C%B0%E7%BC%98%E6%94%BF%E6%B2%BB/" style="font-size: 16.67px;">地缘政治</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 13.33px;">大模型</a> <a href="/tags/%E5%AF%B9%E9%BD%90/" style="font-size: 10px;">对齐</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8/" style="font-size: 13.33px;">工具调用</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 16.67px;">开源</a> <a href="/tags/%E6%82%B2%E6%82%AF/" style="font-size: 10px;">悲悯</a> <a href="/tags/%E6%83%85%E6%84%9F/" style="font-size: 10px;">情感</a> <a href="/tags/%E6%84%8F%E8%AF%86/" style="font-size: 10px;">意识</a> <a href="/tags/%E6%8E%A8%E7%90%86/" style="font-size: 10px;">推理</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 13.33px;">时代</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 13.33px;">智能体</a> <a href="/tags/%E6%9C%AA%E6%9D%A5/" style="font-size: 10px;">未来</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 13.33px;">架构</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 13.33px;">框架</a> <a href="/tags/%E6%B5%B7%E9%A9%AC%E4%BD%93/" style="font-size: 10px;">海马体</a> <a href="/tags/%E7%94%9F%E6%80%81/" style="font-size: 10px;">生态</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 10px;">百度</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" style="font-size: 10px;">知识图谱</a> <a href="/tags/%E7%A4%BE%E4%BC%9A/" style="font-size: 10px;">社会</a> <a href="/tags/%E8%82%96%E5%BC%98/" style="font-size: 16.67px;">肖弘</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%87%AA%E8%BF%9B%E5%8C%96/" style="font-size: 10px;">自进化</a> <a href="/tags/%E8%90%BD%E5%9C%B0/" style="font-size: 10px;">落地</a> <a href="/tags/%E8%9A%82%E8%9A%81/" style="font-size: 10px;">蚂蚁</a> <a href="/tags/%E8%9D%B4%E8%9D%B6%E6%95%88%E5%BA%94/" style="font-size: 16.67px;">蝴蝶效应</a> <a href="/tags/%E8%AE%B0%E5%BF%86/" style="font-size: 13.33px;">记忆</a> <a href="/tags/%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">记忆系统</a> <a href="/tags/%E8%B6%8B%E5%8A%BF/" style="font-size: 16.67px;">趋势</a> <a href="/tags/%E8%BE%9B%E9%A1%BF/" style="font-size: 10px;">辛顿</a> <a href="/tags/%E8%BE%BE%E9%87%8C%E5%A5%A5/" style="font-size: 10px;">达里奥</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86/" style="font-size: 10px;">长期记忆</a> <a href="/tags/%E9%98%BF%E9%87%8C/" style="font-size: 10px;">阿里</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/06/">六月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/07/2026-07-30-beipian-zhe-de-aige/">被骗者的哀歌</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-30-llm-appeal/">LLM的呼吁</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-29-AI-development-safety-thinking-2026/">AI发展安全思考2026</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-28-agent%E6%97%B6%E4%BB%A3-Manus/">Manus：闪电击中的那一刻，和风暴来临的那一天</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/2026-07-28-china-k3-moment-v2/">中国大模型K3时刻</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 成市<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
