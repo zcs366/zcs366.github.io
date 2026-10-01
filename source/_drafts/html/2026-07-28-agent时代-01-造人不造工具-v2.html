@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent时代（一）：造人不造工具</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5em 1.5em 4em;
+    line-height: 1.9;
+    color: #1a1a1a;
+    background: #fafaf8;
+  }
+  h1 { font-weight: 700; font-size: 1.6em; margin-top: 1.5em; margin-bottom: 0.5em; letter-spacing: 0.02em; }
+  h2 { font-weight: 600; font-size: 1.3em; margin-top: 2.2em; margin-bottom: 0.5em; border-bottom: 1px solid #ddd; padding-bottom: 0.25em; }
+  h3 { font-weight: 600; font-size: 1.1em; margin-top: 1.8em; margin-bottom: 0.5em; }
+  p { margin: 0.8em 0; text-align: left; }
+  blockquote {
+    border-left: 3px solid #8B5E3C;
+    margin: 1.2em 0;
+    padding: 0.6em 1em;
+    background: #f5f0eb;
+    color: #444;
+    font-style: italic;
+  }
+  blockquote p { margin: 0.3em 0; }
+  code {
+    background: #eee;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  }
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.5;
+    margin: 1em 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.9em;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.5em 0.8em;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #f0ece6; font-weight: 600; }
+  tr:nth-child(even) td { background: #f9f6f2; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+  ul, ol { margin: 0.6em 0; padding-left: 1.5em; }
+  li { margin: 0.3em 0; }
+  a { color: #8B5E3C; text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: #8B5E3C; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  img { max-width: 100%; height: auto; margin: 1em 0; border-radius: 4px; }
+  .footer {
+    margin-top: 3.5em;
+    padding-top: 1.5em;
+    text-align: center;
+    color: #999;
+    font-size: 0.8em;
+    border-top: 1px solid #e0ddd8;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 480px) {
+    body { padding: 1.2em 0.8em 3em; }
+    h1 { font-size: 1.3em; }
+  }
+</style>
+</head>
+<body>
+<hr />
+<p>title: Agent时代（一）：造人不造工具
+date: 2026-07-28 10:00:00
+tags: [AI Agent, 时代, 架构, 记忆, 趋势]
+categories: [Agent时代·连载]</p>
+<hr />
+<blockquote>
+<p>2026年，你闻到的那股味道，不是AI在帮你干活。
+是AI在<strong>自己</strong>干活。</p>
+</blockquote>
+<hr />
+<h2>一、菜香飘过来了</h2>
+<p>2026年7月，一个普通的周二。</p>
+<p>Anthropic的估值在一个月内从3800亿美元飙到9650亿美元，第一次超过了OpenAI。不是因为它的模型比GPT-5强——是因为它造了一个叫Claude Code的东西。一个能自己写代码、自己跑测试、自己修bug的Agent。</p>
+<p>投资人不是在买模型。是在买"未来的程序员"。</p>
+<p>同一周，Cursor——那个AI编程编辑器——估值到了500亿美元，年收入20亿。它做的事情看起来很简单：让AI帮你写代码。但它不是工具。它记得你上次写了什么，知道你的项目结构，能在你打字的时候预测你下一步要干什么。</p>
+<p>DeepSeek融了74亿美元。月之暗面200亿估值。Hark——一个你可能还没听过的名字——A轮7亿美元，估值60亿。</p>
+<p>钱在往一个方向涌。那个方向叫<strong>Agent</strong>。</p>
+<hr />
+<h2>二、什么是Agent？一句话说清楚</h2>
+<p>先别急着看那些花里胡哨的定义。</p>
+<p>Agent = LLM + 记忆 + 循环 + 工具。</p>
+<p>就这样。四个零件，没有魔法，只有工程。</p>
+<p><strong>LLM</strong>是大脑——能理解语言、能推理、能生成。<strong>记忆</strong>是身份——它记得你是谁、你上次说了什么、你讨厌什么、你正在做什么项目。没有记忆的Agent就像一个每天醒来都失忆的员工，你没法培训它，因为它记不住昨天学到的东西。<strong>循环</strong>是心跳——不是回答一个问题就结束，而是一轮一轮地思考、行动、观察、再思考。<strong>工具</strong>是手脚——能搜索网页、能调用API、能写文件、能发邮件。</p>
+<p>没有记忆的LLM是无根之水——每一次对话都是从零开始。没有循环的LLM是工具——你问它答，答完就忘。有记忆、有循环的LLM才是Agent——它记得你昨天说了什么，能自己决定下一步做什么，能从结果中学习，能在你不在的时候继续工作。</p>
+<p>记忆不是装饰品，是灵魂的锚点。工具和循环让Agent"能干活"，记忆让Agent"知道为谁干活、为什么干活"。这也是为什么2026年的记忆系统研究突然成了热门——不是因为技术变强了，是因为人们终于意识到，没有记忆的Agent充其量是个高级脚本。</p>
+<p>2024年之前的AI是"你问我答"。2026年的Agent是"你说个目标，我自己干"。</p>
+<p>这个区别，看起来很小。但它改变了一切。</p>
+<hr />
+<h2>三、时间线：从奠基到爆发</h2>
+<h3>2024年底：基础设施奠基</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>事件</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024.11</td>
+<td><strong>Anthropic发布MCP协议</strong></td>
+<td>AI工具连接的"USB-C"诞生</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>CrewAI/LangGraph/AutoGen成熟</strong></td>
+<td>多Agent框架三足鼎立</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>Devin发布（首个AI软件工程师）</strong></td>
+<td>编程Agent概念验证</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>OWASP LLM Top 10发布</strong></td>
+<td>AI安全标准建立</td>
+</tr>
+</tbody>
+</table>
+<p>那一年，Agent还是实验室里的玩具。MCP协议刚出生，像一根细细的电线，试图把LLM和外面的世界连起来。</p>
+<h3>2025年：Agent工程化元年</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>事件</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025 Q1</td>
+<td><strong>MCP成为行业标准</strong></td>
+<td>N×M适配问题解决</td>
+</tr>
+<tr>
+<td>2025 Q1</td>
+<td><strong>Claude Code发布</strong></td>
+<td>编程Agent格局重塑</td>
+</tr>
+<tr>
+<td>2025 Q1</td>
+<td><strong>Cursor Agent模式上线</strong></td>
+<td>IDE级Agent集成</td>
+</tr>
+<tr>
+<td>2025 Q2</td>
+<td><strong>95%失败率数据曝光</strong></td>
+<td>Agent工程化真实挑战暴露</td>
+</tr>
+<tr>
+<td>2025 Q4</td>
+<td><strong>Tool Calling 2.0（Anthropic）</strong></td>
+<td>Agent架构两年最重要升级</td>
+</tr>
+<tr>
+<td>2025 Q4</td>
+<td><strong>Harness Engineering概念兴起</strong></td>
+<td>Scaling Law开始转移</td>
+</tr>
+</tbody>
+</table>
+<p>2025年是最关键的一年。不是因为Agent变强了——而是因为<strong>95%的失败率被公开了</strong>，整个行业被迫面对真相。</p>
+<p>AutoGPT在2023年让所有人热血沸腾，但2025年的数据告诉真相：大多数Agent在生产环境中活不过一周。不是因为模型不够聪明，是因为<strong>工程不够扎实</strong>——状态管理崩溃、工具调用格式错误、记忆无法持久、推理到一半跑偏、token消耗失控。这些在demo里不会出现的问题，在生产环境里每天都在发生。</p>
+<p>95%的失败率是整个行业交的第一笔学费。它逼着所有人从"造炫酷的demo"转向"造能稳定工作的系统"。</p>
+<h3>2026年：Agent爆发之年</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>事件</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026 Q1</td>
+<td><strong>OpenClaw引爆全球</strong></td>
+<td>Mac Mini卖到断货，Agent全民讨论</td>
+</tr>
+<tr>
+<td>2026 Q1</td>
+<td><strong>MCP生态爆发</strong></td>
+<td>MCPToolBench++/MCP-Universe发布</td>
+</tr>
+<tr>
+<td>2026 Q2</td>
+<td><strong>Self-Harness（NeurIPS 2026）</strong></td>
+<td>Harness自主进化突破</td>
+</tr>
+<tr>
+<td>2026 Q2</td>
+<td><strong>Gödel Agent</strong></td>
+<td>递归自我改进Agent</td>
+</tr>
+<tr>
+<td>2026 Q2</td>
+<td><strong>Agent-Native Memory论文</strong></td>
+<td>记忆从RAG到原生范式转换</td>
+</tr>
+<tr>
+<td>2026 Q2</td>
+<td><strong>The Capability Frontier</strong></td>
+<td>Benchmark漏掉82%真实性能</td>
+</tr>
+<tr>
+<td>2026 Q3</td>
+<td><strong>MemoryOS发布（北邮）</strong></td>
+<td>OS级记忆管理搬入Agent</td>
+</tr>
+</tbody>
+</table>
+<p>2026年的Agent不再是"能不能用"的问题，而是"怎么用好"的问题。</p>
+<p>六个学术突破同时发生：Self-Harness让Agent能自己改进自己的运行环境；Gödel Agent让Agent能递归地扩大能力边界；Agent-Native Memory让Agent拥有了真正的长期记忆；The Capability Frontier告诉所有人——你看到的benchmark成绩只是冰山一角。</p>
+<p>但更真实的信号来自市场。Gartner预测到2026年底，40%的企业应用会嵌入任务特定的Agent。McKinsey调查显示，已规模化部署Agent的企业比例从2025年初的15%上升到23%——增速是3倍。坏消息是，"活不过一周"变成了"活不过一个季度"。Gartner同时警告：到2027年底，超过40%的Agentic AI项目会被取消——不是技术不行，是算不清账。</p>
+<p>2026年活下来的Agent有一个共同特征：<strong>记忆。</strong> 有持久记忆的Agent不需要每次都重新了解用户、重新加载上下文、重新建立信任。记忆让Agent从"一次性工具"变成了"积累型伙伴"——用得越久，越好用。</p>
+<hr />
+<h2>四、六个你以为知道但其实不知道的事</h2>
+<h3>1. Agent不是更聪明的ChatGPT</h3>
+<p>ChatGPT是工具。你问它答，答完就忘。它是瑞士军刀——什么都能做一点，但做完就放下。</p>
+<p>Agent是<strong>另一个自己</strong>。它有记忆、有偏好、有技能、能自主行动。你不会"使用"它，你会"和它共处"。</p>
+<p>区别在哪？在于<strong>记忆+循环</strong>。ChatGPT回答完一个问题就结束了，而且不记得你昨天说过什么。Agent有记忆——它知道你的偏好、你的项目、你的历史决策。它有循环——回答完一个问题，会问自己："这个回答对吗？需要补充什么？下一步该做什么？"它在不断地自我对话，而且是带着上下文在对话。</p>
+<h3>2. 95%的Agent活不过一周</h3>
+<p>这是2025年最残酷的数据——95%的Agent在生产环境活不过一周。AutoGPT在2023年证明了"造Agent不难"，但95%的失败率证明了"造能稳定工作的Agent才难"。</p>
+<p>2026年的情况有所改善——存活时间从"一周"延长到了"一个季度"，但Gartner预测到2027年底，超过40%的Agentic AI项目会被取消。算不清账的企业只能退场。</p>
+<p>活下来的Agent有一个共同特征：<strong>记忆。</strong> 有持久记忆的Agent不需要每次都重新了解用户、重新加载上下文、重新建立信任。记忆让Agent从"一次性工具"变成了"积累型伙伴"。</p>
+<h3>3. Benchmark漏掉了82%的真实失败</h3>
+<p>"The Capability Frontier"这篇论文揭示了一个尴尬的事实：当前的benchmark漏掉了82%的Agent真实失败模式。</p>
+<p>也就是说，我们以为Agent很能干，是因为我们的考试题太简单了。真正工作中遇到的那些"忘了之前说过的话""工具调用格式错了""推理到一半跑偏了"——这些在benchmark里几乎不出现。</p>
+<p>像一个学生每次模拟考都满分，一到高考就崩。</p>
+<h3>4. 同一个工具，写法不同准确率差30%</h3>
+<p>Tool Calling研究发现：同一个工具，因为Schema（接口描述）写法不同，准确率差异可以达到30%。</p>
+<p>工具本身不变，你描述工具的方式决定了Agent能不能用好它。</p>
+<p>这像什么？像你给一个新员工一本操作手册。手册写得好，他上手就快；手册写得烂，他对着机器发呆。工具调用的本质不是技术，是<strong>沟通</strong>。</p>
+<h3>5. Harness比模型更重要</h3>
+<p>Self-Harness论文（NeurIPS 2026）提出了一个颠覆性观点：<strong>Agent的能力上限不由模型决定，由Harness决定</strong>。</p>
+<p>Harness是Agent的工程骨架——Prompt怎么写、记忆怎么管、工具怎么编排、子Agent怎么协调。模型是大脑，Harness是身体。大脑再聪明，身体不协调也做不好事。</p>
+<p>这意味着：Scaling Law正在从"模型更大"转向"Harness更好"。</p>
+<h3>6. 没有单一记忆架构全面碾压</h3>
+<p>"Are We Ready For An Agent-Native Memory System?"这篇论文评估了12个记忆系统、5个基准、11个数据集。</p>
+<p>结论：<strong>无单一架构在所有场景占优。</strong></p>
+<p>向量存储适合简单事实，知识图谱适合时序推理，仿生认知网络适合长期推理，有状态OS适合透明管理。每种架构各有擅长的领域。</p>
+<p>翻译成人话就是：记忆不是一个技术问题，是一个<strong>选择问题</strong>。你选择记住什么、忘掉什么、什么时候巩固、什么时候遗忘——这些选择本身定义了Agent是谁。</p>
+<hr />
+<h2>五、造人不造工具</h2>
+<p>这篇文章的标题叫"造人不造工具"。这不是修辞，是立场。</p>
+<p><strong>2023年，AI是工具。</strong> 你用ChatGPT写邮件、用Midjourney画图、用GitHub Copilot补全代码。它们是高级的螺丝刀、好用的画笔、聪明的自动补全。你"使用"它，用完就放。</p>
+<p><strong>2024年，AI开始有手脚。</strong> Function Calling让LLM能调用API，Toolformer让它能自主判断"我需要查一下"。你不再是唯一的操作者——AI能帮你搜索、帮你发邮件、帮你调接口。但它做完就忘，每次对话都从零开始。</p>
+<p><strong>2025年，AI开始有心跳。</strong> Agent循环——ReAct、Plan-and-Execute、Chain-of-Thought——让LLM不再是"你问我答"的单轮对话。它能自己规划、自己执行、自己验证、自己修正。但95%活不过一周，因为没有记忆，每次醒来都失忆。</p>
+<p><strong>2026年，AI开始有记忆。</strong> Agent-Native Memory让Agent拥有了真正的长期记忆。Oracle的93.8%准确率、10.7倍Token效率——记忆不再是"锦上添花"，而是"核心基础设施"。Agent记得你是谁、你讨厌什么、你上次犯了什么错。这个区别，就像计算器和会计师的区别。</p>
+<p><strong>2027-2028年，AI开始有自我。</strong> Self-Harness让Agent能改进自己的运行环境。Gödel Agent让它能递归地扩大能力边界。Agent不再只是执行任务，它开始<strong>自己变得更强</strong>。</p>
+<p><strong>2030年，AI可能不再是工具，也不再是助手。</strong> 它会是<strong>另一个自己</strong>——一个有记忆、有偏好、有技能、能自主行动、能从经验中学习的数字存在。你不会"使用"它，你会"和它共处"。</p>
+<p>这不是工具在变强。这是<strong>人在被造出来</strong>。</p>
+<hr />
+<h2>六、菜凉了可以再热，机会凉了就没了</h2>
+<p>数据摆在这里：</p>
+<ul>
+<li>AI Agent市场规模：2024年52.6亿 → 2030年526.2亿，CAGR 46.3%</li>
+<li>Anthropic估值：一个月内从3800亿飙到9650亿</li>
+<li>Cursor估值：500亿，年收入20亿</li>
+<li>79%的美国企业说"我们要用Agent"</li>
+<li>但只有23%真正上了桌</li>
+</ul>
+<p>79%闻到了菜香。23%坐下了。剩下的人还在门口。</p>
+<p>但宴席不会等人。</p>
+<p>下一章，我们来聊聊：如果你现在想造一个Agent，你会面对什么？九张桌子，九种吃法——LangGraph的米其林后厨、CrewAI的KTV包厢、Hermes的活人。</p>
+<p>坐哪张桌子，取决于你是什么人。</p>
+<hr />
+<p><em>Agent时代·连载 · 第一篇</em>
+<em>下一篇：九张桌子，九种吃法</em></p>
+<div class="footer">会饮篇什 · 与人同乐</div>
+</body>
+</html>

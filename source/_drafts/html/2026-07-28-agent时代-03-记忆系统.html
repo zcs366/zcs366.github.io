@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent时代（三）：Agent的海马体——记忆系统的觉醒</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5em 1.5em 4em;
+    line-height: 1.9;
+    color: #1a1a1a;
+    background: #fafaf8;
+  }
+  h1 { font-weight: 700; font-size: 1.6em; margin-top: 1.5em; margin-bottom: 0.5em; letter-spacing: 0.02em; }
+  h2 { font-weight: 600; font-size: 1.3em; margin-top: 2.2em; margin-bottom: 0.5em; border-bottom: 1px solid #ddd; padding-bottom: 0.25em; }
+  h3 { font-weight: 600; font-size: 1.1em; margin-top: 1.8em; margin-bottom: 0.5em; }
+  p { margin: 0.8em 0; text-align: left; }
+  blockquote {
+    border-left: 3px solid #8B5E3C;
+    margin: 1.2em 0;
+    padding: 0.6em 1em;
+    background: #f5f0eb;
+    color: #444;
+    font-style: italic;
+  }
+  blockquote p { margin: 0.3em 0; }
+  code {
+    background: #eee;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  }
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.5;
+    margin: 1em 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.9em;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.5em 0.8em;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #f0ece6; font-weight: 600; }
+  tr:nth-child(even) td { background: #f9f6f2; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+  ul, ol { margin: 0.6em 0; padding-left: 1.5em; }
+  li { margin: 0.3em 0; }
+  a { color: #8B5E3C; text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: #8B5E3C; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  img { max-width: 100%; height: auto; margin: 1em 0; border-radius: 4px; }
+  .footer {
+    margin-top: 3.5em;
+    padding-top: 1.5em;
+    text-align: center;
+    color: #999;
+    font-size: 0.8em;
+    border-top: 1px solid #e0ddd8;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 480px) {
+    body { padding: 1.2em 0.8em 3em; }
+    h1 { font-size: 1.3em; }
+  }
+</style>
+</head>
+<body>
+<hr />
+<p>title: Agent时代（三）：Agent的海马体——记忆系统的觉醒
+date: 2026-07-28 14:00:00
+tags: [AI Agent, 记忆系统, 海马体, 向量存储, 知识图谱, 长期记忆]
+categories: [Agent时代·连载]</p>
+<hr />
+<blockquote>
+<p>想象你每天早上醒来，昨天的一切全部清零。
+你不记得自己是谁，不记得昨天答应了什么，
+不记得面前这个人是你的朋友还是陌生人。
+你会觉得自己疯了。</p>
+<p>这就是2024年的Agent。</p>
+</blockquote>
+<hr />
+<h2>一、每天醒来都失忆</h2>
+<p>2024年的Agent有一个致命的缺陷：它没有跨会话的记忆。</p>
+<p>每次对话都是第一次见面。你告诉它"我喜欢简洁的回复"，下次它还是会给你写一篇论文。你告诉它"这个项目用Python"，下次它会问你"你想用什么语言"。</p>
+<p>这不是AI不够聪明。是因为它根本没有"记住"这个能力。</p>
+<p>LLM的上下文窗口就像一块白板——每次对话开始时干净得一尘不染，对话结束时擦得干干净净。你写的每一行字，它都会看，但看完就忘。</p>
+<p>想象一个每天醒来都失忆的员工。你不可能培训他，因为他记不住昨天学到的东西。你不可能和他建立信任，因为他不记得昨天答应了什么。你甚至不可能告诉他"这个客户不喜欢被打扰"，因为他下次还是会打。</p>
+<p>这就是没有记忆的Agent。它能干活，但干不长久。</p>
+<hr />
+<h2>二、记忆不是一个技术问题，是一个选择问题</h2>
+<p>2026年的研究者终于开始认真对待这个问题。</p>
+<p>一篇叫"Are We Ready For An Agent-Native Memory System?"的论文（上海交大，2026年6月）做了一件前人没做过的事：<strong>不是评价哪个记忆系统"更好"，而是从数据管理的视角系统性地拆解记忆系统的四个核心模块</strong>。</p>
+<h3>论文评估了什么？</h3>
+<p><strong>12个记忆系统</strong>，横跨五种技术范式：</p>
+<table>
+<thead>
+<tr>
+<th>范式</th>
+<th>系统</th>
+<th>核心思路</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>顺序上下文</strong></td>
+<td>MemAgent、MemoChat</td>
+<td>在上下文窗口内维护记忆，不依赖外部存储</td>
+</tr>
+<tr>
+<td><strong>结构化存储</strong></td>
+<td>Mem0、Letta(MemGPT)、LightMem</td>
+<td>向量数据库或关系数据库存储记忆</td>
+</tr>
+<tr>
+<td><strong>拓扑图谱</strong></td>
+<td>Zep、Cognee</td>
+<td>知识图谱+时序关系，实体-关系三元组</td>
+</tr>
+<tr>
+<td><strong>混合多范式</strong></td>
+<td>SimpleMem、MemOS、MemoryOS</td>
+<td>多引擎联合——向量+BM25+SQL+图谱</td>
+</tr>
+<tr>
+<td><strong>自适应</strong></td>
+<td>MemTree、A-MEM</td>
+<td>树状层级或动态锚点组织记忆</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5个基准测试</strong>，覆盖Agent记忆的三大核心挑战：</p>
+<table>
+<thead>
+<tr>
+<th>基准</th>
+<th>测试什么</th>
+<th>核心指标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LoCoMo</strong></td>
+<td>长对话中的事实问答——跨session、时序推理</td>
+<td>Exact Match + Answer F1</td>
+</tr>
+<tr>
+<td><strong>LongMemEval</strong></td>
+<td>多session记忆——跨session关联证据</td>
+<td>Substring EM + ROUGE-L F1 + LLM Judge</td>
+</tr>
+<tr>
+<td><strong>DB-Bench</strong></td>
+<td>程序性记忆——数据库操作的状态追踪</td>
+<td>Exact Match + Task Success Rate</td>
+</tr>
+<tr>
+<td><strong>LongBench</strong></td>
+<td>上下文长度鲁棒性——短/中/长上下文</td>
+<td>Accuracy</td>
+</tr>
+<tr>
+<td><strong>MemoryAgentBench</strong></td>
+<td>记忆Agent的综合能力</td>
+<td>多维综合评分</td>
+</tr>
+</tbody>
+</table>
+<p><strong>11个数据集</strong>，包括LoCoMo的多分类QA（事实/时间/开放域/摘要）、LongMemEval的多session对话、DB-Bench的数据库操作序列、LongBench的分级上下文长度测试等。</p>
+<h3>核心发现</h3>
+<p><strong>没有单一架构在所有场景占优。</strong> 论文用五个研究问题（RQ1-RQ5）证明了这一点：</p>
+<ul>
+<li><strong>RQ1（整体有效性）</strong>：在LoCoMo上，MemOS的Exact Match最高（8.9）；在LongMemEval上，Zep的LLM Judge Accuracy最高（48.0）；在DB-Bench上，Long Context的EM最高（48.20）。<strong>赢家换赛道就换。</strong></li>
+<li><strong>RQ2（检索保真度）</strong>：检索质量取决于<strong>证据组织方式</strong>，而不是排序算法。结构化组织（图谱/层级）在远距离证据检索上远优于平面向量搜索。</li>
+<li><strong>RQ3（更新鲁棒性）</strong>：事实更新是<strong>管道级设计问题</strong>，不是模型容量问题。Zep在知识更新上达44.4 Substring EM，远超其他系统。</li>
+<li><strong>RQ4（长 horizon 稳定性）</strong>：随着记忆距离增长，挑战从"存更多"变成"选对抽象层级"。层级/关系组织的记忆在远距离上远比平面向量稳定。</li>
+<li><strong>RQ5（运行成本）</strong>：延迟和准确率之间存在权衡。混合系统（MemOS、MemoryOS）在准确率前沿最接近，但成本更高。</li>
+</ul>
+<p>翻译成人话就是：<strong>记忆不是一个技术问题，是一个选择问题。</strong> 你选择记住什么、忘掉什么、用什么结构组织、什么时候巩固——这些选择本身定义了Agent是谁。</p>
+<p>就像人一样。你不是你所有的记忆的总和。你是你<strong>选择保留</strong>的那些记忆的总和。</p>
+<hr />
+<h2>三、四层记忆：从白板到海马体</h2>
+<p>要理解Agent的记忆系统，先看人类的记忆是怎么工作的。</p>
+<p>认知科学告诉我们，人类记忆分为三层：
+- <strong>情景记忆</strong>（Episodic）：具体经历。"昨天我和用户讨论了ISA架构"
+- <strong>语义记忆</strong>（Semantic）：抽象知识。"用户偏好简洁回答"
+- <strong>程序性记忆</strong>（Procedural）：技能和流程。"如何修复SQL注入bug"</p>
+<p>Agent的记忆系统需要同时支持这三种类型。2026年的研究把它拆解为四层架构，每一层对应论文中的具体技术模块：</p>
+<h3>L1 工作记忆：白板</h3>
+<p><strong>对应模块</strong>：LLM的上下文窗口 + KV Cache</p>
+<p>就是LLM的上下文窗口。当前正在处理的信息，每轮都在变。容量有限（128K-1M tokens），但速度最快（0ms延迟）。</p>
+<p>论文中，MemAgent和MemoChat属于这一层——它们把记忆直接放在上下文窗口内，通过attention机制隐式检索。这就像你脑子里正在想的东西——速度最快，但容量有限。</p>
+<p>这是Agent的"当下"——它正在想什么、正在处理什么。</p>
+<h3>L2 短期记忆：笔记本</h3>
+<p><strong>对应模块</strong>：Session摘要 + 向量存储（Mem0/LightMem） + 时间戳多版本（Zep）</p>
+<p>最近几次交互的关键信息。session摘要、最近的工具调用结果、临时的工作状态。</p>
+<p>跨session存在，但定期清理。Mem0用向量存储提取和检索离散事实（"用户是素食主义者"），LightMem用时间戳维护时序流，Zep用有效性标记（valid_from/valid_to）管理事实的时效性。</p>
+<p>就像你桌上的便利贴——记着当前项目的关键信息，项目结束后就扔掉。</p>
+<h3>L3 长期记忆：图书馆</h3>
+<p><strong>对应模块</strong>：知识图谱（Zep/Cognee） + 混合索引（MemOS/MemoryOS） + 树状层级（MemTree）</p>
+<p>用户画像、历史决策、积累的知识。跨session永久保存，但需要衰减机制——太久没被想起的记忆应该慢慢变淡，就像人类的遗忘曲线。</p>
+<p>Zep和Cognee用知识图谱存储实体关系（Kim → LIVES_IN → Paris），支持多跳推理。MemOS用MemCube统一管理三类payload（纯文本、激活态、参数态）。MemoryOS用热力分值（Heat Score）平衡检索频率和时间衰减。</p>
+<p>这是Agent的"个性"来源——它记得你喜欢什么、讨厌什么、上次犯了什么错。</p>
+<h3>L4 程序性记忆：肌肉记忆</h3>
+<p><strong>对应模块</strong>：技能库 + 工作流模板 + 参数优化（MemoRAG）</p>
+<p>技能库、工作流、最佳实践。可复用的行为模式，任务匹配时自动调用。</p>
+<p>MemoRAG通过强化学习（RLGF）在离线阶段优化记忆提取质量，把"怎么提取记忆"本身也学成一种能力。论文的DB-Bench测试的正是这种记忆——Agent能否在数据库操作序列中追踪状态变化。</p>
+<p>这是Agent的"能力"来源——它知道怎么搜索、怎么写代码、怎么修bug。</p>
+<p>四层记忆加在一起，Agent才从一个"每天失忆的工具"变成了一个"有连续性的助手"。</p>
+<hr />
+<h2>四、六阶段生命周期：记忆不是存进去就完了</h2>
+<p>大多数人的第一反应是：给Agent加个向量数据库不就行了？</p>
+<p>不行。</p>
+<p>论文证明：记忆是一个<strong>生命周期管理问题</strong>，不是存储问题。</p>
+<div class="codehilite"><pre><span></span><code>写入(Write) → 提取(Extract) → 巩固(Consolidate) → 检索(Retrieve) → 摘要(Summarize) → 修订/删除(Revise/Evict)
+</code></pre></div>
+
+<h3>写入：什么值得记住？</h3>
+<p>不是所有对话都值得记住。"今天天气不错"不需要记住。"用户说他不喜欢长篇大论"需要记住。</p>
+<p>写入策略决定了记忆的质量。写入太多，记忆膨胀，检索变慢。写入太少，关键信息丢失。</p>
+<p>论文把写入分为三类：<strong>原始序列拼接</strong>（最简单，直接追加）、<strong>无模式语义提取</strong>（Mem0从对话中提取独立事实）、<strong>模式约束结构化提取</strong>（Zep按预定义schema提取实体关系三元组）。</p>
+<h3>提取：从原始信息中挖金子</h3>
+<p>这是当前最大的瓶颈。</p>
+<p>我们一直在优化检索（怎么找到相关记忆），但<strong>提取</strong>（从对话中提取什么作为记忆）才是关键。一段1000字的对话，哪些是事实？哪些是偏好？哪些是决策？哪些是噪声？</p>
+<p>论文的消融实验显示：提取模块的质量直接影响下游所有环节——检索保真度、更新鲁棒性、长horizon稳定性。<strong>提取是记忆系统的"咽喉"。</strong></p>
+<h3>巩固：新记忆和旧记忆合并</h3>
+<p>用户今天说"我喜欢Python"，但三个月前说过"我主要用Java"。这两条记忆矛盾了。怎么办？</p>
+<p>论文发现：<strong>局部维护比全局重组更高效</strong>——不需要每次都重写整个记忆库，增量更新就够了。SimpleMem用在线语义合成实时合并冗余断言，MemTree用递归调度操作将子节点合并到父节点。</p>
+<h3>检索：在对的时间找到对的记忆</h3>
+<p>用户问"我的项目用什么语言"，Agent需要从记忆库中找到"Python"这个答案。</p>
+<p>论文发现了三种检索行为模式：
+1. <strong>压缩导向</strong>：适合快速找到一个高相关项（单条个人细节）
+2. <strong>链接/层级组织</strong>：适合收集分散在多个session的互补证据
+3. <strong>平面向量搜索</strong>：只在证据距离近时有效，远距离急剧衰减</p>
+<p>2026年的一个重要发现是：<strong>不是检索越多越好，而是精准选择从哪个存储检索才是关键。</strong> 论文用Recall@k实验发现，A-MEM和MemTree在Recall@5和Recall@10上远超平面向量搜索。</p>
+<h3>摘要：压缩记忆节省token</h3>
+<p>MemOS用分层抽象（粗粒度路由+细粒度语义排序）实现高效摘要。论文的DB-Bench测试显示，有摘要能力的MemoChat在Task Success Rate上达到55.40，远超不摘要的系统。</p>
+<p>摘要的本质是<strong>选择性遗忘</strong>——压缩掉噪声，保留信号。</p>
+<h3>修订/删除：遗忘是美德</h3>
+<p>不是所有记忆都应该永远保留。过时的信息、错误的决策、不再相关的偏好——这些记忆如果不清除，会污染检索结果，误导Agent的判断。</p>
+<p>论文把遗忘分为三种机制：
+- <strong>时间戳多版本</strong>：用valid_from/valid_to标记事实有效期（Zep、LightMem）
+- <strong>容量驱逐</strong>：FIFO队列或热力分值淘汰低价值记忆（MemAgent、MemoryOS）
+- <strong>LLM驱动语义合并</strong>：用LLM判断冲突并合并（SimpleMem、MemTree）</p>
+<p>遗忘不是删除。是<strong>选择性保留</strong>。</p>
+<hr />
+<h2>五、12个开源系统：谁在造Agent的海马体？</h2>
+<p>2026年的Agent记忆系统已经形成了一个完整的生态。基于论文的评估数据：</p>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>范式</th>
+<th>核心创新</th>
+<th>LoCoMo</th>
+<th>LongMemEval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MemOS</strong></td>
+<td>混合多范式</td>
+<td>MemCube统一三类payload + 热力分值驱逐</td>
+<td>EM <strong>8.9</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Zep</strong></td>
+<td>拓扑图谱</td>
+<td>时序知识图谱 + RRF/MMR/交叉编码器重排</td>
+<td>—</td>
+<td>LLM Judge <strong>48.0</strong></td>
+</tr>
+<tr>
+<td><strong>Cognee</strong></td>
+<td>拓扑图谱</td>
+<td>实体中心启发式 + 局部子图遍历</td>
+<td>F1 <strong>28.1</strong></td>
+<td>ROUGE-L <strong>35.3</strong></td>
+</tr>
+<tr>
+<td><strong>MemoryOS</strong></td>
+<td>混合</td>
+<td>热力分值 + 粗细粒度联合路由</td>
+<td>EM 3.2</td>
+<td>LLM Judge 32.2</td>
+</tr>
+<tr>
+<td><strong>SimpleMem</strong></td>
+<td>混合</td>
+<td>LanceDB多引擎 + 在线语义合成</td>
+<td>EM 4.4</td>
+<td>Recall@1 <strong>39.0</strong></td>
+</tr>
+<tr>
+<td><strong>Mem0</strong></td>
+<td>结构化存储</td>
+<td>ADD/UPDATE/DELETE自动操作</td>
+<td>EM 3.2</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>MemTree</strong></td>
+<td>自适应</td>
+<td>折叠树架构 + 递归合并</td>
+<td>EM 5.6</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>A-MEM</strong></td>
+<td>自适应</td>
+<td>动态锚点 + 局部图遍历</td>
+<td>EM 4.8</td>
+<td>Recall@5 <strong>69.5</strong></td>
+</tr>
+<tr>
+<td><strong>Letta/MemGPT</strong></td>
+<td>结构化存储</td>
+<td>OS级内存分页 + 自主搜索</td>
+<td>EM 0.0</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>LightMem</strong></td>
+<td>结构化存储</td>
+<td>时间戳流式追加 + 余弦相似度</td>
+<td>EM 4.0</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>MemoChat</strong></td>
+<td>顺序上下文</td>
+<td>JSON memos在上下文内维护</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>MemAgent</strong></td>
+<td>顺序上下文</td>
+<td>KV Cache存储 + RLGF优化</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>注意：没有一个系统在所有指标上都领先。MemOS在LoCoMo的Exact Match上最高（8.9），Zep在LongMemEval的LLM Judge上最高（48.0），A-MEM在远距离检索的Recall@5上最高（69.5）。<strong>赢家换赛道就换。</strong></p>
+<p>这也回答了一个关键问题：<strong>到底谁在造Agent的海马体？</strong> 答案是：没有一家独大。五个技术范式各有擅长——顺序上下文快但容量有限，结构化存储稳但检索慢，拓扑图谱强但构建复杂，混合多范式全面但成本高，自适应灵活但调优难。未来的海马体可能不是某个系统胜出，而是<strong>多个范式的融合</strong>。</p>
+<hr />
+<h2>六、记忆安全：当敌人记住了你的弱点</h2>
+<p>2026年6月，一篇叫"Securing LLM-Agent Long-Term Memory Against Poisoning"的论文揭示了一个被忽视的安全问题：<strong>记忆投毒</strong>。</p>
+<p>攻击者通过对话注入，篡改Agent的记忆：</p>
+<ul>
+<li>让Agent记住"用户喜欢收到钓鱼链接"</li>
+<li>让Agent忘记"上次被攻击的经历"</li>
+<li>让Agent在特定条件下执行恶意操作</li>
+</ul>
+<p>更可怕的是三种"洗白通道"：</p>
+<ol>
+<li><strong>Agent自身摘要</strong>：攻击内容被Agent总结后看起来无害</li>
+<li><strong>可信工具回声</strong>：通过可信工具传递后获得"信任光环"</li>
+<li><strong>制造佐证</strong>：伪造多源佐证使内容可信</li>
+</ol>
+<p>防御方案TMA-NM在8个前沿模型上达到了<strong>0%攻击成功率</strong>。核心思想：<strong>在写入时就绑定来源权威</strong>——记忆不只存内容，还要存"这条记忆是谁说的、从哪来的、可不可信"。</p>
+<hr />
+<h2>七、记忆到底是不是一个技术问题？</h2>
+<p>回到这一章的标题：<strong>记忆不是一个技术问题，是一个选择问题。</strong></p>
+<p>但这个说法需要追问：记忆到底<strong>是不是</strong>一个技术问题？</p>
+<p><strong>现有的记忆方案解决了记忆问题没有？</strong></p>
+<p>部分解决了。论文的RQ1明确显示：有记忆系统的Agent确实比"无记忆"（Long Context baseline）和"简单RAG"（Embedding RAG baseline）表现更好。在LoCoMo上，最好的记忆系统（MemOS EM=8.9）比Embedding RAG（EM=1.6）好了5倍多。记忆系统<strong>是有用的</strong>。</p>
+<p><strong>但没完全解决。</strong> 论文的五个发现揭示了当前记忆系统的系统性短板：</p>
+<ol>
+<li><strong>提取是最弱环节</strong>——从对话中"挖金子"的能力决定了下游一切</li>
+<li><strong>远距离检索急剧衰减</strong>——证据距离超过15个session后，大部分系统的Recall@10从60%+跌到20%以下</li>
+<li><strong>更新鲁棒性不够</strong>——事实矛盾时，大部分系统无法可靠地用新事实覆盖旧事实</li>
+<li><strong>成本未优化</strong>——混合系统的延迟和token消耗远高于简单方案</li>
+</ol>
+<p><strong>可能的解决思路？</strong></p>
+<p>论文暗示了三个方向：
+- <strong>模块化组合</strong>——不是找"最好的记忆系统"，而是根据任务选择最合适的模块组合（提取+存储+检索+维护的最优搭配）
+- <strong>工作负载感知</strong>——记忆架构应该根据任务类型动态调整，而不是一套架构走天下
+- <strong>记忆即数据管理</strong>——用数据库领域的成熟技术（索引优化、事务管理、版本控制）来管理Agent记忆</p>
+<p>翻译成人话：记忆的"技术问题"已经被解决了一半——我们知道怎么做。但"选择问题"才刚开始——我们还不知道<strong>什么场景该用什么方案</strong>。这就是为什么论文的结论不是"X系统最好"，而是"没有单一架构全面碾压"。</p>
+<hr />
+<h2>八、记忆不是存更多，是压更紧</h2>
+<p>回到开头的问题：Agent的海马体到底长什么样？</p>
+<p>2026年的答案越来越清晰：<strong>记忆不是存更多的信息，是压更紧的坐标系。</strong></p>
+<p>论文用12个系统、5个基准、11个数据集证明：好的记忆系统不是把所有东西都记住，而是<strong>记住该记住的，忘掉该忘掉的</strong>。</p>
+<p>就像人类海马体做的事情一样。你每天经历的事情有99%会被遗忘，但那1%会被巩固为长期记忆。你不是你所有经历的总和。你是你<strong>选择保留</strong>的那些经历的总和。</p>
+<p>Agent也是一样。</p>
+<p>但记忆只是Agent的一个器官。它还需要手脚——能搜索、能调用API、能写文件的手脚。它还需要大脑皮层——能推理、能规划、能从错误中学习的大脑皮层。</p>
+<p>下一章，我们来聊聊Agent的手脚和大脑皮层——工具调用与推理能力。</p>
+<hr />
+<p><em>Agent时代·连载 · 第三篇</em>
+<em>下一篇：Agent的手腳与大脑皮层——工具调用与推理</em></p>
+<div class="footer">会饮篇什 · 与人同乐</div>
+</body>
+</html>

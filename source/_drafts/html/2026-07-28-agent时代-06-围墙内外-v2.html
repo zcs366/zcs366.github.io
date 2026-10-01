@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent时代（六）：围墙内外——中国的Agent战场</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5em 1.5em 4em;
+    line-height: 1.9;
+    color: #1a1a1a;
+    background: #fafaf8;
+  }
+  h1 { font-weight: 700; font-size: 1.6em; margin-top: 1.5em; margin-bottom: 0.5em; letter-spacing: 0.02em; }
+  h2 { font-weight: 600; font-size: 1.3em; margin-top: 2.2em; margin-bottom: 0.5em; border-bottom: 1px solid #ddd; padding-bottom: 0.25em; }
+  h3 { font-weight: 600; font-size: 1.1em; margin-top: 1.8em; margin-bottom: 0.5em; }
+  p { margin: 0.8em 0; text-align: left; }
+  blockquote {
+    border-left: 3px solid #8B5E3C;
+    margin: 1.2em 0;
+    padding: 0.6em 1em;
+    background: #f5f0eb;
+    color: #444;
+    font-style: italic;
+  }
+  blockquote p { margin: 0.3em 0; }
+  code {
+    background: #eee;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  }
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 1em 1.2em;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.5;
+    margin: 1em 0;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.9em;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.5em 0.8em;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #f0ece6; font-weight: 600; }
+  tr:nth-child(even) td { background: #f9f6f2; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+  ul, ol { margin: 0.6em 0; padding-left: 1.5em; }
+  li { margin: 0.3em 0; }
+  a { color: #8B5E3C; text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: #8B5E3C; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  img { max-width: 100%; height: auto; margin: 1em 0; border-radius: 4px; }
+  .footer {
+    margin-top: 3.5em;
+    padding-top: 1.5em;
+    text-align: center;
+    color: #999;
+    font-size: 0.8em;
+    border-top: 1px solid #e0ddd8;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 480px) {
+    body { padding: 1.2em 0.8em 3em; }
+    h1 { font-size: 1.3em; }
+  }
+</style>
+</head>
+<body>
+<hr />
+<p>title: Agent时代（六）：围墙内外——中国的Agent战场
+date: 2026-07-28 20:00:00
+tags: [AI Agent, 中国, 蚂蚁, 阿里, 腾讯, 百度, 开源, 生态, 养虾]
+categories: [Agent时代·连载]</p>
+<hr />
+<blockquote>
+<p>美国在造公路，中国在造收费站。
+但公路和收费站，哪个更有价值？</p>
+</blockquote>
+<hr />
+<h2>一、两场不同的战争</h2>
+<p>中国的Agent战场和美国不太一样。但要理解这种不同，先要分清两件事：<strong>LLM</strong>和<strong>Agent</strong>。</p>
+<p>LLM是模型——通义千问、文心一言、GPT-4、Claude。它们是"大脑"，能理解语言、能推理、能生成。</p>
+<p>Agent是系统——LLM + 记忆 + 循环 + 工具。它不只是"能说话"，而是"能干活"。</p>
+<p>很多讨论把这两件事混为一谈。说"中国的大模型追上美国了"——这可能是真的。但说"中国的Agent追上美国了"——这需要另当别论。因为Agent不只看模型能力，还看<strong>生态</strong>——工具链、协议标准、开发者社区、部署基础设施。</p>
+<p>美国的Agent生态有两个明显的阵营：</p>
+<p><strong>开源阵营</strong>：以OpenClaw为代表——38.4万+GitHub星标，登顶GitHub历史第一。MCP协议由Anthropic开源后交给Linux基金会，A2A（Agent间通信协议）由Google推动。框架社区（LangGraph、CrewAI）定义了Agent的底层范式。</p>
+<p><strong>闭源阵营</strong>：以OpenAI为代表——ChatGPT Work把Agent融入对话框，Codex已合并入ChatGPT桌面应用。Anthropic的Claude Code是编程Agent的标杆。<strong>闭源Agent正在走向"超级App"</strong>——你不需要学习新工具，在你已经习惯的聊天框里就能用Agent。</p>
+<p>中国的Agent生态则呈现另一幅图景：<strong>大厂养虾，百虾大战。</strong></p>
+<hr />
+<h2>二、百虾大战：大厂养虾进行时</h2>
+<p>2026年初，OpenClaw（开源Agent框架，社区昵称"龙虾"）在中国引爆了一场"养虾热"。38.4万+GitHub星标，超越Linux和React，登顶GitHub历史第一。</p>
+<p>但事情很快变了味。</p>
+<p><strong>时间线：</strong>
+- <strong>2026年1月</strong>：OpenClaw开源，技术圈关注
+- <strong>2026年1月底</strong>：阿里云、腾讯云同步上线一键部署服务
+- <strong>2026年2月</strong>：百度智能云推出镜像
+- <strong>2026年3月初</strong>：腾讯云工程师在深圳"摆摊"免费帮安装；马化腾朋友圈感慨"没想到会这么火"
+- <strong>2026年3月中旬</strong>：十几家大厂在不到三周内密集完成"产品发布→云端部署→线下推广"
+- <strong>2026年3月中旬后</strong>：用户卸载潮出现（闲鱼出现299元卸载服务），但大厂反而加速布局</p>
+<p>这不是技术竞争，是<strong>生态卡位</strong>。大厂不是在造Agent，是在造Agent的"鱼塘"——你的Agent在我家的云上跑，用我家的模型，接我家的工具，数据存在我家的服务器上。</p>
+<h3>四大巨头的Agent版图</h3>
+<p><strong>蚂蚁集团：Agentar 2.0——数字劳动力工厂</strong></p>
+<p>蚂蚁集团CEO韩歆毅的观点一针见血：<strong>Agent不是加速现有任务的工具，而是重组企业工作方式的"数字劳动力"。</strong> Agentar 2.0提供200个预配置"数字专家模板"，无需编码即可部署自主AI工人。核心逻辑：一旦企业围绕某个平台的Agent重构业务流程，切换成本极高——<strong>锁定效应就是生意本身</strong>。</p>
+<p><strong>阿里云：从"百虾"到"千问办公"</strong></p>
+<p>阿里在2026年7月进入整合期。推出"千问办公"整合QoderWork+悟空+MuleRun。内部数据：15个协调Agent处理85%的开发者支持请求，运维支持时间降低90%，软件发布周期缩短至一天。</p>
+<p>但阿里的真正野心不在工具——在基础设施。Agent Native Cloud让Agent运行在专门为Agent设计的云上，而不是传统云服务器的"租户模式"。</p>
+<p><strong>腾讯：WorkBuddy——工作空间集成</strong></p>
+<p>腾讯的切入点是企业微信。Dayuan（企业微信AI助手）从群聊/文档/会议/邮件/日历自动提取上下文，把Agent嵌入到已有的工作流中。2026年7月，QClaw团队并入WorkBuddy体系——<strong>从"百虾大战"走向"超级工作台"</strong>。</p>
+<p>不造新工具，把Agent塞进旧工具——这是腾讯的风格，也是它的护城河。</p>
+<p><strong>百度：DuMate→通用Agent</strong></p>
+<p>百度的DuMate是最"通用"的一个——跨App/文件执行任务。但"什么都能做"的反面是"什么都做不精"。</p>
+<p><strong>华为：鸿蒙Agent架构</strong></p>
+<p>华为在2026年6月的HDC上宣布：鸿蒙智能向Agent架构全面演进。HarmonyOS 7的Agent架构+开源盘古openPangu 2.0，走的是<strong>操作系统级Agent</strong>的路——不靠云端API，而是让Agent直接在设备端运行。这是和所有其他玩家都不同的路径。</p>
+<h3>大厂整合趋势（2026年7月）</h3>
+<p>从"百虾大战"到"超级工作台"——三大巨头同步进入整合期：
+- 腾讯：QClaw团队并入WorkBuddy体系
+- 阿里：推出"千问办公"整合QoderWork+悟空+MuleRun
+- 字节：TRAE SOLO改名TRAE Work，讨论飞书与豆包深度整合</p>
+<hr />
+<h2>三、海外：开源与闭源的两条路</h2>
+<p>海外的Agent生态不是"美国 vs 中国"那么简单。它有两条平行的路：</p>
+<h3>开源路：社区驱动的基础设施</h3>
+<p>以OpenClaw为代表——38.4万+星标，8万+Fork，2500+贡献者，月均PR 800+。开源Agent的优势是<strong>互操作性</strong>——MCP是开放的，任何Agent都可以接入任何工具。社区驱动，创新速度快。</p>
+<p>但开源Agent有明显的短板：<strong>安全</strong>。CNCERT 2026年3月发布预警——全球公网暴露的OpenClaw实例超41万个，国内约23万个"裸奔"，存在SMB凭证泄露、环境变量注入等漏洞。开源意味着透明，也意味着攻击面大。</p>
+<h3>闭源路：超级App化</h3>
+<p>以OpenAI为代表——<strong>Agent正在融入对话框</strong>。</p>
+<p>2026年7月，OpenAI发布了ChatGPT Work：一个长时间运行的Agent，能跨应用收集信息、创建文档/幻灯片/网站，自主执行数小时。Codex已合并入ChatGPT桌面应用。Greg Brockman（联合创始人）接管产品领导权。</p>
+<p><strong>这意味着什么？</strong> OpenAI不再卖"编程工具"或"聊天机器人"——它在做<strong>超级App</strong>。你不需要学习新工具，在你已经习惯的ChatGPT里就能用Agent。GPT-5.6三版本（Sol旗舰/Terra平衡/Luna最快）驱动不同场景。</p>
+<p>Anthropic走了类似的路但更专注——Claude Code是编程Agent的标杆，但它也在往通用方向走。2026年的CC已经能做代码审查、架构分析、文档生成、技术调研。</p>
+<p><strong>开源vs闭源的本质区别：</strong>
+- 开源：你拥有数据，你控制流程，你承担安全责任
+- 闭源：服务商拥有数据，服务商控制体验，服务商承担安全责任</p>
+<p>选择取决于你是开发者还是用户，是企业还是个人，是需要灵活性还是需要省心。</p>
+<hr />
+<h2>四、WAIC 2026：一个关键时间点</h2>
+<p>2026年7月17-20日，世界人工智能大会（WAIC）在上海举办。这不是一个普通的行业会议——它可能是Agent时代的<strong>分水岭</strong>。</p>
+<h3>为什么重要？</h3>
+<p><strong>规模空前</strong>：10万+㎡展区，1100+家企业参展，3000+项展品，<strong>349款全球首发产品</strong>，140余场主题论坛，1400+位国际嘉宾。</p>
+<p><strong>规格空前</strong>：习近平主席出席并发表主旨讲话；哈萨克斯坦总统、柬埔寨首相、泰国总理、联合国秘书长古特雷斯出席。</p>
+<p><strong>战略信号</strong>：世界人工智能合作组织成立——全球首个AI政府间国际组织，总部设在上海。《人工智能合作发展行动计划》和《国际人工智能伦理治理行动计划》同步发布。</p>
+<h3>四大核心方向</h3>
+<p>WAIC宣传片明确传递四大方向：<strong>基石筑底、征程赶超、边界定规、生态繁荣</strong>。</p>
+<p>翻译成人话：
+- <strong>基石筑底</strong>：算力基础设施——"东数西算2.0"降低推理成本40-60%
+- <strong>征程赶超</strong>：核心能力追赶——中国模型在编程维度已超越闭源前沿（Kimi K3/DeepSeek V4）
+- <strong>边界定规</strong>：规则制定——AI伦理、安全标准、国际治理
+- <strong>生态繁荣</strong>：产业落地——从"比谁的模型强"转向"比谁能更深地嵌入业务"</p>
+<h3>Agent视角的关键信号</h3>
+<p><strong>具身智能升格</strong>：超过200家企业、208款具身智能终端参展——Agent从"软件"走向"软硬一体"。</p>
+<p><strong>从模型到工作流</strong>：核心主题从"模型能力"转向"企业工作流自动化"。这标志着中国Agent市场的转折点：<strong>不再比谁的模型强，而是比谁能更深地嵌入业务执行链条。</strong></p>
+<p><strong>大厂同步整合</strong>：WAIC期间，蚂蚁、阿里、腾讯、百度集中发布Agent产品——从"百虾大战"走向"超级工作台"。这不是巧合，是产业成熟的信号。</p>
+<p>WAIC 2026告诉我们：<strong>Agent不再是技术圈的玩具，而是国家战略级的基础设施。</strong></p>
+<hr />
+<h2>五、中国Agent的独特优势</h2>
+<p>中国做Agent有一些独特优势，是美国没有的：</p>
+<ol>
+<li><strong>Token经济规模</strong>：日均Token调用量140万亿（人均10万/天），Agent是唯一能消耗千亿级Token的"算力出口"</li>
+<li><strong>超级App入口</strong>：微信/支付宝/钉钉的入口效应，让Agent无需新装App即可触达十亿用户</li>
+<li><strong>价格优势</strong>：国产模型API成本仅为海外1/30-1/50，极大降低Agent试错成本</li>
+<li><strong>政策加速</strong>：国务院"人工智能+"行动明确要求2027年智能体普及率超70%</li>
+<li><strong>市场规模</strong>：2025年中国AI Agent市场804亿元（+123.2%），2030年预测6968亿元</li>
+</ol>
+<p>但也有独特挑战：</p>
+<ol>
+<li><strong>合规三法叠加</strong>：数据安全法+个人信息保护法+网络安全法，Agent能访问什么数据、能做什么操作、日志保留多久——有严格的红线</li>
+<li><strong>生态碎片化</strong>：每家大厂都在造自己的闭环，互操作性差</li>
+<li><strong>安全意识不足</strong>：23万个OpenClaw实例"裸奔"——这不是技术问题，是意识问题</li>
+</ol>
+<hr />
+<h2>六、围墙内外，谁更有未来？</h2>
+<p>美国的开源生态和中国的围墙花园，哪种模式更有未来？</p>
+<p>答案可能是：<strong>两者都会存在，但最终会融合。</strong></p>
+<p>MCP从Anthropic内部实验变成了Linux基金会行业标准。OpenAI Apps SDK的UI层也被上游化为MCP Apps标准。<strong>协议在统一，生态在融合。</strong></p>
+<p>开源与闭源的差距也在收窄。中国模型（Kimi K3/DeepSeek V4）在编程维度已超越闭源前沿，但综合智能仍有差距。李开复说"中美AI差距在6-12个月上下拉锯"，Sam Altman说"美国严重低估中国AI的场景落地能力"。</p>
+<p>最终决定胜负的不是生态模式，而是<strong>谁先解决可靠性问题</strong>。79%的企业说要Agent，89%的试点没能规模化。不管你是开放还是封闭，解决不了可靠性，就上不了桌。</p>
+<p>但有一件事是确定的：<strong>开发者框架是基础。</strong> 没有MCP协议，没有Function Calling标准，没有Agent Loop范式——智能体Agent恐怕是不能出生和成长的。框架是Agent的子宫，协议是Agent的血脉，生态是Agent的土壤。</p>
+<p>Agent时代的终局，不取决于谁的围墙更高，而取决于谁的地基更深。</p>
+<hr />
+<p><em>Agent时代·连载 · 第六篇</em>
+<em>下一篇：这不是终点——终章</em></p>
+<div class="footer">会饮篇什 · 与人同乐</div>
+</body>
+</html>
